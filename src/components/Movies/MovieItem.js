@@ -5,17 +5,30 @@ const MovieItem = (props) => {
   return (
     <Fragment>
       <div className={classes.movie}>
-        <span>
+        <span className={`${classes.spanImage} ${classes.spanContent}`}>
           <img
             className={classes.coverPhoto}
-            src="https://i.pinimg.com/originals/58/ee/39/58ee39fd81e8c0d90676180a3b8e97d0.png"
-            alt="Movie Cover photo"
+            src={props.movie.coverImage}
+            alt="Movie Cover"
           />
         </span>
-        <span>
-          <h3>Star Wars: A New Hop (Episode IV)</h3>
-          <p>Release date: 15.07.2021.</p>
-          <p>Cast: Carrie Fisher, Mark Hamil, Harrison Ford</p>
+        <span className={classes.spanConten}>
+          <h3>{props.movie.title}</h3>
+          <p>{props.movie.description}</p>
+          <p>
+            <b>Release date:</b>{" "}
+            {props.movie.releaseDate
+              .toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })
+              .replace(/ /g, " ")}
+          </p>
+          <p>
+            <b>Cast: </b>
+            {props.movie.cast.join(", ")}
+          </p>
         </span>
       </div>
       <div className={classes.rating}>

@@ -1,14 +1,25 @@
 .movie {
   display: flex;
   justify-content: space-between;
-  margin: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
+  margin: 0.5rem;
+  border-bottom: 2px solid #800000;
 }
 
 .coverPhoto {
+  display: flex;
+  justify-content: center;
   width: 10rem;
   height: auto;
+}
+
+.spanContent {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.spanImage {
+  display: flex;
+  align-items: center;
 }
 
 .rating {

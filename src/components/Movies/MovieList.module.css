@@ -3,5 +3,5 @@
   width: 60%;
   margin: auto;
   margin-top: 10rem;
-  animation: 1s ease-out forwards;
+  animation: movie-list 1s ease-out forwards;
 }

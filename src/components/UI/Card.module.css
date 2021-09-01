@@ -2,6 +2,7 @@
   padding: 0.5rem;
   box-shadow: 0 2px 8px rgba(29, 29, 29, 0.25);
   border-radius: 14px;
-  background-color: white;
+  background-color: rgba(167, 167, 167, 0.25);
   margin: 0.5rem auto;
+  color: whitesmoke;
 }
