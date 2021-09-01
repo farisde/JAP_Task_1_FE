@@ -1,9 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
+import Header from "./components/Layout/Header";
+import Card from "./components/UI/Card";
 
 function App() {
   return (
     <Fragment>
-      <h1>MovieBuff</h1>
+      <Header />
     </Fragment>
   );
 }
