@@ -10,6 +10,7 @@
   justify-content: center;
   width: 10rem;
   height: auto;
+  border: 1px solid #800000;
 }
 
 .spanContent {
@@ -29,4 +30,6 @@
 
 h3 {
   margin-top: 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #800000;
 }

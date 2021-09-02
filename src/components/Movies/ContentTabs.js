@@ -24,13 +24,13 @@ const ContentTabs = (props) => {
       <div className={classes.tabs}>
         <h2>Browse top rated</h2>
         <button
-          className={`${showMovies ? classes.active : ""}`}
+          className={`${showMovies ? classes.active : classes.toggleHover}`}
           onClick={handleMoviesTabClick}
         >
           Movies
         </button>
         <button
-          className={`${showSeries ? classes.active : ""}`}
+          className={`${showSeries ? classes.active : classes.toggleHover}`}
           onClick={handlSeriesTabClick}
         >
           TV Shows

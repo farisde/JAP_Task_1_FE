@@ -1,6 +1,6 @@
 .movies {
-  max-width: 60rem;
-  width: 60%;
+  max-width: 80rem;
+  width: 70%;
   margin: auto;
   margin-top: 1.5rem;
   animation: movie-list 1s ease-out forwards;

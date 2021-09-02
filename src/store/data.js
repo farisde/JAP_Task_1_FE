@@ -117,9 +117,9 @@ export const initialSeries = [
       "Archie, Betty, Jughead and Veronica tackle being teenagers in a town that is rife with sinister happenings and blood-thirsty criminals.",
     releaseDate: new Date(2017, 0, 26),
     coverImage:
-      "https://static.wikia.nocookie.net/riverdalearchie/images/3/3a/Season_2_Poster.jpg/revision/latest?cb=20170823165338",
+      "https://static.wikia.nocookie.net/riverdalearchie/images/3/3a/Season_2_Poster.jpg",
     cast: ["Cole Sprouse", "Lili Reinhart", "Camila Mender", "KJ Apa"],
-    rating: 5,
+    rating: 4.5,
   },
   {
     id: 1,
@@ -128,7 +128,7 @@ export const initialSeries = [
       "A wanted fugitive mysteriously surrenders himself to the FBI and offers to help them capture deadly criminals. His sole condition is that he will work only with the new profiler, Elizabeth Keen.",
     releaseDate: new Date(2013, 8, 23),
     coverImage:
-      "https://static.wikia.nocookie.net/blacklist/images/5/57/Season_7_Poster.jpg/revision/latest?cb=20190916095128",
+      "https://static.wikia.nocookie.net/blacklist/images/5/57/Season_7_Poster.jpg",
     cast: ["James Spader", "Megan Boone", "Diego Klattenhoff", "Harry Lennix"],
     rating: 5,
   },
@@ -141,7 +141,7 @@ export const initialSeries = [
     coverImage:
       "https://i.pinimg.com/originals/06/b2/2f/06b22f1ec7b9a6914ec6255f40953e98.jpg",
     cast: ["Jared Harris", "Stellan Skarsgård", "Emily Watson", "Paul Ritter"],
-    rating: 5,
+    rating: 3.6,
   },
   {
     id: 3,
@@ -152,7 +152,7 @@ export const initialSeries = [
     coverImage:
       "https://www.enigma-mag.com/wp-content/uploads/2019/08/1563490297.jpg",
     cast: ["Úrsula Corberó", "Álvaro Morte", "Itziar Ituño", "Miguel Herrán"],
-    rating: 5,
+    rating: 4,
   },
   {
     id: 4,
@@ -163,7 +163,7 @@ export const initialSeries = [
     coverImage:
       "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Modern_Family_Season_Two_DVD_Cover.png/250px-Modern_Family_Season_Two_DVD_Cover.png",
     cast: ["Sofía Vergara", "Eric Stonestreet", "Julie Bowen", "Sarah Hyland"],
-    rating: 5,
+    rating: 4.3,
   },
   {
     id: 5,
@@ -179,6 +179,6 @@ export const initialSeries = [
       "Giancarlo Esposito",
       "Carl Weathers",
     ],
-    rating: 5,
+    rating: 4.2,
   },
 ];
