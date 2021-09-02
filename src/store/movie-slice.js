@@ -1,17 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialMovies, initialSeries } from "./data";
+import { initialMovies } from "./data";
 
 const movieSlice = createSlice({
   name: "movie",
   initialState: {
-    movies: initialMovies,
-    series: initialSeries,
+    allContent: [],
+    movies: [],
+    series: [],
     showMovies: true,
     showSeries: false,
     searchContent: "",
-    searchResults: [],
   },
   reducers: {
+    replaceContentList(state, action) {
+      state.allContent = action.payload.content;
+      state.movies = action.payload.content.filter((m) => m.isMovie);
+      state.series = action.payload.content.filter((m) => !m.isMovie);
+    },
     showMovies(state) {
       if (!state.showMovies) {
         state.showMovies = !state.showMovies;
@@ -29,12 +34,6 @@ const movieSlice = createSlice({
     },
     filterSearchResults(state) {
       let filteredContent = [...state.movies, ...state.series];
-
-      // if (state.showMovies) {
-      //   filteredContent = [...initialMovies];
-      // } else if (state.showSeries) {
-      //   filteredContent = [...initialSeries];
-      // }
 
       filteredContent = filteredContent.filter((item) => {
         return (
@@ -59,9 +58,9 @@ const movieSlice = createSlice({
     resetSearchResults(state) {
       //sa BackEnda trebas vratiti friskih top 10 filmova ili serija. tako je najlakse da ne komplikujes ovaj dio!
       if (state.showMovies) {
-        state.movies = initialMovies;
+        state.movies = state.allContent.filter((m) => m.isMovie);
       } else if (state.showSeries) {
-        state.series = initialSeries;
+        state.series = state.allContent.filter((m) => !m.isMovie);
       }
     },
     updateMovieRating(state, action) {

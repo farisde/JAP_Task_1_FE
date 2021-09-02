@@ -1,8 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MovieList from "./MovieList";
 import classes from "./ContentTabs.module.css";
 import { movieActions } from "../../store/movie-slice";
+import { fetchContentList } from "../../store/movie-actions";
 
 const ContentTabs = (props) => {
   const showMovies = useSelector((state) => state.movie.showMovies);
@@ -10,6 +11,10 @@ const ContentTabs = (props) => {
   const movies = useSelector((state) => state.movie.movies);
   const series = useSelector((state) => state.movie.series);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContentList());
+  }, [dispatch]);
 
   const handleMoviesTabClick = () => {
     dispatch(movieActions.showMovies());
@@ -41,7 +46,7 @@ const ContentTabs = (props) => {
         </button>
       </div>
       {showMovies && !showSeries && <MovieList contentList={movies} />}
-      {showSeries && !showMovies && <MovieList contentList={series} />}
+      {!showMovies && showSeries && <MovieList contentList={series} />}
     </Fragment>
   );
 };

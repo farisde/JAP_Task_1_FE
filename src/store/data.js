@@ -127,11 +127,8 @@ export const initialMovies = [
     ratingList: [4.9],
     isMovie: true,
   },
-];
-
-export const initialSeries = [
   {
-    id: 0,
+    id: 10,
     title: "Riverdale",
     description:
       "Archie, Betty, Jughead and Veronica tackle being teenagers in a town that is rife with sinister happenings and blood-thirsty criminals.",
@@ -144,7 +141,7 @@ export const initialSeries = [
     isMovie: false,
   },
   {
-    id: 1,
+    id: 11,
     title: "The Blacklist",
     description:
       "A wanted fugitive mysteriously surrenders himself to the FBI and offers to help them capture deadly criminals. His sole condition is that he will work only with the new profiler, Elizabeth Keen.",
@@ -157,7 +154,7 @@ export const initialSeries = [
     isMovie: false,
   },
   {
-    id: 2,
+    id: 12,
     title: "Chernobyl",
     description:
       "In April 1986, the city of Chernobyl in the Soviet Union suffers one of the worst nuclear disasters in the history of mankind. Consequently, many heroes put their lives on the line to save Europe.",
@@ -170,7 +167,7 @@ export const initialSeries = [
     isMovie: false,
   },
   {
-    id: 3,
+    id: 13,
     title: "La Casa De Papel",
     description:
       'A criminal mastermind who goes by "The Professor" has a plan to pull off the biggest heist in recorded history -- to print billions of euros in the Royal Mint of Spain. To help him carry out the ambitious plan, he recruits eight people with certain abilities and who have nothing to lose.',
@@ -183,7 +180,7 @@ export const initialSeries = [
     isMovie: false,
   },
   {
-    id: 4,
+    id: 14,
     title: "Modern Family",
     description:
       "Three modern-day families from California try to deal with their kids, quirky spouses and jobs in their own unique ways, often falling into hilarious situations.",
@@ -196,7 +193,7 @@ export const initialSeries = [
     isMovie: false,
   },
   {
-    id: 5,
+    id: 15,
     title: "The Mandalorian",
     description:
       "After the defeat of the Empire at the hands of Rebel forces, a lone bounty hunter operating in the Outer Rim, away from the dominion of the New Republic, goes on many surprising and risky adventures.",
