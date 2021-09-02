@@ -1,7 +1,7 @@
 export const initialMovies = [
   {
     id: 0,
-    title: "Star Wars: A New Hop (Episode IV)",
+    title: "Star Wars: A New Hope (Episode IV)",
     description:
       "After Princess Leia, the leader of the Rebel Alliance, is held hostage by Darth Vader, Luke and Han Solo must free her and destroy the powerful weapon created by the Galactic Empire.",
     releaseDate: new Date(1977, 4, 25),

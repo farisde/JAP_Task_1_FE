@@ -1,7 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .movies {
   max-width: 80rem;
   width: 70%;
   margin: auto;
   margin-top: 1.5rem;
   animation: movie-list 1s ease-out forwards;
+}
+
+.loadButton {
+  font-size: 23px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: whitesmoke;
+  transition: all ease-in-out 0.1s;
+  border-bottom: 2px solid transparent;
+  font-size: 25px;
+  width: 13rem;
+  background-color: #800000;
+  border-radius: 14px;
+  margin-top: 0.25rem;
+  margin-bottom: 2rem;
+}
+
+.loadButton:hover {
+  background-color: rgba(128, 0, 0, 0.7);
 }

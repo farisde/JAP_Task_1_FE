@@ -1,3 +1,6 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Fragment } from "react";
 import Card from "../UI/Card";
 import MovieItem from "./MovieItem";
 import classes from "./MovieList.module.css";
@@ -9,13 +12,19 @@ const MovieList = (props) => {
   );
 
   return (
-    <section className={classes.movies}>
-      {contentListByRating.map((movie) => (
-        <Card key={movie.id}>
-          <MovieItem movie={movie} />
-        </Card>
-      ))}
-    </section>
+    <div className={classes.container}>
+      <section className={classes.movies}>
+        {contentListByRating.map((movie) => (
+          <Card key={movie.id}>
+            <MovieItem movie={movie} />
+          </Card>
+        ))}
+      </section>
+      <button className={classes.loadButton}>
+        <FontAwesomeIcon icon={faSpinner} />
+        &nbsp; Load more
+      </button>
+    </div>
   );
 };
 

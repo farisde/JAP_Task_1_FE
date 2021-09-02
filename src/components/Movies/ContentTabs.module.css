@@ -9,7 +9,7 @@
   color: whitesmoke;
 }
 
-button {
+.tabButton {
   font-size: 23px;
   background: transparent;
   border: none;
@@ -18,15 +18,15 @@ button {
   width: 10rem;
   cursor: pointer;
   color: whitesmoke;
-  transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.1s;
   border-bottom: 2px solid transparent;
 }
 
-button:first-of-type {
+.tabButton:first-of-type {
   border-radius: 14px 0 0 14px;
 }
 
-button:last-of-type {
+.tabButton:nth-of-type(2) {
   border-radius: 0 14px 14px 0;
 }
 
