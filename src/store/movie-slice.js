@@ -6,8 +6,24 @@ const movieSlice = createSlice({
   initialState: {
     movies: initialMovies,
     series: initialSeries,
+    showMovies: true,
+    showSeries: false,
   },
-  reducers: {},
+  reducers: {
+    showMovies(state) {
+      if (!state.showMovies) {
+        state.showMovies = !state.showMovies;
+        state.showSeries = !state.showSeries;
+      }
+    },
+    showSeries(state) {
+      if (!state.showSeries) {
+        state.showSeries = !state.showSeries;
+        state.showMovies = !state.showMovies;
+      }
+    },
+  },
 });
 
+export const movieActions = movieSlice.actions;
 export default movieSlice.reducer;

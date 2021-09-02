@@ -1,0 +1,39 @@
+.tabs {
+  font-family: arial;
+  margin: 0 auto;
+  width: 20rem;
+  text-align: center;
+  margin-top: 10rem;
+  border-radius: 14px;
+  border-bottom: 2px solid #800000;
+  color: whitesmoke;
+}
+
+button {
+  font-size: 23px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  width: 10rem;
+  cursor: pointer;
+  color: whitesmoke;
+  transition: all ease-in-out 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+button:first-of-type {
+  border-radius: 14px 0 0 14px;
+}
+
+button:last-of-type {
+  border-radius: 0 14px 14px 0;
+}
+
+.active {
+  background-color: rgba(187, 0, 0, 0.4);
+}
+
+button:hover:not(.active) {
+  background-color: rgba(69, 73, 77, 1);
+}
