@@ -9,6 +9,8 @@ export const initialMovies = [
       "https://kbimages1-a.akamaihd.net/538b1473-6d45-47f4-b16e-32a0a6ba7f9a/1200/1200/False/star-wars-episode-iv-a-new-hope-3.jpg",
     cast: ["Carrie Fisher", "Mark Hamil", "Harrison Ford"],
     rating: 5,
+    ratingList: [5],
+    isMovie: true,
   },
   {
     id: 1,
@@ -19,6 +21,8 @@ export const initialMovies = [
     coverImage: "https://images.penguinrandomhouse.com/cover/9780345320223",
     cast: ["Carrie Fisher", "Mark Hamil", "Harrison Ford"],
     rating: 4.8,
+    ratingList: [4.8],
+    isMovie: true,
   },
   {
     id: 2,
@@ -29,6 +33,8 @@ export const initialMovies = [
     coverImage: "https://m.media-amazon.com/images/I/91LlN7J+Z9L._SL1500_.jpg",
     cast: ["Carrie Fisher", "Mark Hamil", "Harrison Ford"],
     rating: 4.9,
+    ratingList: [4.9],
+    isMovie: true,
   },
   {
     id: 3,
@@ -40,6 +46,8 @@ export const initialMovies = [
       "https://m.media-amazon.com/images/M/MV5BOTAzODEzNDAzMl5BMl5BanBnXkFtZTgwMDU1MTgzNzE@._V1_.jpg",
     cast: ["Carrie Fisher", "Mark Hamil", "Daisy Ridley"],
     rating: 4.5,
+    ratingList: [4.5],
+    isMovie: true,
   },
   {
     id: 4,
@@ -51,6 +59,8 @@ export const initialMovies = [
       "https://i.pinimg.com/originals/f4/5a/ea/f45aea75f65c0feb5cbe168f17a9a087.jpg",
     cast: ["Carrie Fisher", "Mark Hamil", "Daisy Ridley"],
     rating: 4.9,
+    ratingList: [4.9],
+    isMovie: true,
   },
   {
     id: 5,
@@ -62,6 +72,8 @@ export const initialMovies = [
       "https://lumiere-a.akamaihd.net/v1/images/star-wars-the-rise-of-skywalker-theatrical-poster-1000_ebc74357.jpeg?region=0%2C0%2C891%2C1372",
     cast: ["Carrie Fisher", "Adam Driver", "Daisy Ridley"],
     rating: 4,
+    ratingList: [4],
+    isMovie: true,
   },
   {
     id: 6,
@@ -73,6 +85,8 @@ export const initialMovies = [
       "https://play-lh.googleusercontent.com/sR1pzOxnF50WLR3vUqXYFvY01_tLD4XPn1RDHf0Xh-W04Vek_3iiZ98U7Db2JcmrqS8",
     cast: ["Natalie Portman", "Ewan McGregor", "Liam Neeson"],
     rating: 3.5,
+    ratingList: [3.5],
+    isMovie: true,
   },
   {
     id: 7,
@@ -84,6 +98,8 @@ export const initialMovies = [
       "https://m.media-amazon.com/images/M/MV5BMDAzM2M0Y2UtZjRmZi00MzVlLTg4MjEtOTE3NzU5ZDVlMTU5XkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_.jpg",
     cast: ["Hayden Christensen", "Natalie Portman", "Ewan McGregor"],
     rating: 3.8,
+    ratingList: [3.8],
+    isMovie: true,
   },
   {
     id: 8,
@@ -95,6 +111,8 @@ export const initialMovies = [
       "https://play-lh.googleusercontent.com/mMyoXM8bf72KK-Udap4-hAvqqdXgn0AIBXkS8zejT0RXITIh8oK9a-SYIVk89CA0rHJi",
     cast: ["Hayden Christensen", "Natalie Portman", "Ewan McGregor"],
     rating: 4.2,
+    ratingList: [4.2],
+    isMovie: true,
   },
   {
     id: 9,
@@ -106,6 +124,8 @@ export const initialMovies = [
       "https://i.pinimg.com/originals/17/aa/71/17aa718c1ab15b482505b8431cf596fc.jpg",
     cast: ["Zoe Saldana", "Sam Worthington", "Sigourney Weaver"],
     rating: 4.9,
+    ratingList: [4.9],
+    isMovie: true,
   },
 ];
 
@@ -120,6 +140,8 @@ export const initialSeries = [
       "https://static.wikia.nocookie.net/riverdalearchie/images/3/3a/Season_2_Poster.jpg",
     cast: ["Cole Sprouse", "Lili Reinhart", "Camila Mender", "KJ Apa"],
     rating: 4.5,
+    ratingList: [4.5],
+    isMovie: false,
   },
   {
     id: 1,
@@ -131,6 +153,8 @@ export const initialSeries = [
       "https://static.wikia.nocookie.net/blacklist/images/5/57/Season_7_Poster.jpg",
     cast: ["James Spader", "Megan Boone", "Diego Klattenhoff", "Harry Lennix"],
     rating: 5,
+    ratingList: [5],
+    isMovie: false,
   },
   {
     id: 2,
@@ -142,6 +166,8 @@ export const initialSeries = [
       "https://i.pinimg.com/originals/06/b2/2f/06b22f1ec7b9a6914ec6255f40953e98.jpg",
     cast: ["Jared Harris", "Stellan Skarsgård", "Emily Watson", "Paul Ritter"],
     rating: 3.6,
+    ratingList: [3.6],
+    isMovie: false,
   },
   {
     id: 3,
@@ -153,6 +179,8 @@ export const initialSeries = [
       "https://www.enigma-mag.com/wp-content/uploads/2019/08/1563490297.jpg",
     cast: ["Úrsula Corberó", "Álvaro Morte", "Itziar Ituño", "Miguel Herrán"],
     rating: 4,
+    ratingList: [4],
+    isMovie: false,
   },
   {
     id: 4,
@@ -164,6 +192,8 @@ export const initialSeries = [
       "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Modern_Family_Season_Two_DVD_Cover.png/250px-Modern_Family_Season_Two_DVD_Cover.png",
     cast: ["Sofía Vergara", "Eric Stonestreet", "Julie Bowen", "Sarah Hyland"],
     rating: 4.3,
+    ratingList: [4.3],
+    isMovie: false,
   },
   {
     id: 5,
@@ -180,5 +210,7 @@ export const initialSeries = [
       "Carl Weathers",
     ],
     rating: 4.2,
+    ratingList: [4.2],
+    isMovie: false,
   },
 ];

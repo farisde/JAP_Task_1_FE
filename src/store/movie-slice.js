@@ -9,6 +9,7 @@ const movieSlice = createSlice({
     showMovies: true,
     showSeries: false,
     searchContent: "",
+    searchResults: [],
   },
   reducers: {
     showMovies(state) {
@@ -27,13 +28,13 @@ const movieSlice = createSlice({
       state.searchContent = action.payload;
     },
     filterSearchResults(state) {
-      let filteredContent = [];
+      let filteredContent = [...state.movies, ...state.series];
 
-      if (state.showMovies) {
-        filteredContent = [...initialMovies];
-      } else if (state.showSeries) {
-        filteredContent = [...initialSeries];
-      }
+      // if (state.showMovies) {
+      //   filteredContent = [...initialMovies];
+      // } else if (state.showSeries) {
+      //   filteredContent = [...initialSeries];
+      // }
 
       filteredContent = filteredContent.filter((item) => {
         return (
@@ -56,10 +57,31 @@ const movieSlice = createSlice({
       }
     },
     resetSearchResults(state) {
+      //sa BackEnda trebas vratiti friskih top 10 filmova ili serija. tako je najlakse da ne komplikujes ovaj dio!
       if (state.showMovies) {
-        state.movies = [...initialMovies];
+        state.movies = initialMovies;
       } else if (state.showSeries) {
-        state.series = [...initialSeries];
+        state.series = initialSeries;
+      }
+    },
+    updateMovieRating(state, action) {
+      let itemIndex = -1;
+      if (state.showMovies) {
+        itemIndex = state.movies.findIndex(
+          (item) => item.id == action.payload.itemId
+        );
+        state.movies[itemIndex].ratingList.push(action.payload.newRating);
+        state.movies[itemIndex].rating =
+          state.movies[itemIndex].ratingList.reduce((i1, i2) => i1 + i2, 0) /
+          state.movies[itemIndex].ratingList.length;
+      } else if (state.showSeries) {
+        itemIndex = state.series.findIndex(
+          (item) => item.id == action.payload.itemId
+        );
+        state.series[itemIndex].ratingList.push(action.payload.newRating);
+        state.series[itemIndex].rating =
+          state.series[itemIndex].ratingList.reduce((i1, i2) => i1 + i2, 0) /
+          state.series[itemIndex].ratingList.length;
       }
     },
   },
