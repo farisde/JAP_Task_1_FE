@@ -4,7 +4,14 @@ import { initialMovies } from "./data";
 export const fetchContentList = () => {
   return async (dispatch) => {
     const fetchMovies = async () => {
-      return initialMovies;
+      const response = await fetch("https://localhost:5001/Movie/AllMovies");
+
+      if (!response.ok) {
+        throw new Error("Something went wrong while fetching movie data!");
+      }
+
+      const allContent = await response.json();
+      return allContent.data;
     };
 
     try {

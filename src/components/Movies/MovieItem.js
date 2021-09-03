@@ -49,7 +49,7 @@ const MovieItem = (props) => {
           <p>{props.movie.description}</p>
           <p>
             <b>Release date:</b>{" "}
-            {props.movie.releaseDate
+            {new Date(props.movie.releaseDate)
               .toLocaleDateString("en-GB", {
                 day: "numeric",
                 month: "short",
