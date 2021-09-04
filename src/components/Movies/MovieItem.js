@@ -1,32 +1,26 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import StarRatingComponent from "react-star-rating-component";
 import classes from "./MovieItem.module.css";
-import { movieActions } from "../../store/movie-slice";
 import Swal from "sweetalert2";
 import { Rating } from "@material-ui/lab";
 import { updateContentRating } from "../../store/movie-actions";
+import "./SwalStyle.css";
 
 const MovieItem = (props) => {
   const dispatch = useDispatch();
 
   const onStarClickHandler = (event, value) => {
     dispatch(updateContentRating(props.movie.id, value)).then(() => {
-      const swalText = `You have successfully rated "<b>${props.movie.title}</b>" with <b>${value} star(s)</b>!`;
-
-      const customSwal = Swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-danger",
-        },
-      });
-      customSwal.fire({
-        title: "Thank you for your rating!",
+      const swalText = `<div style='color:whitesmoke'>You have successfully rated "<b>${props.movie.title}</b>" with <b>${value} star(s)</b>!</div>`;
+      Swal.fire({
+        title: `<div style='color:whitesmoke'>Thank you for your rating!</div>`,
         html: swalText,
         icon: "success",
         backdrop: true,
         showConfirmButton: true,
         confirmButtonColor: "#800000",
         focusConfirm: false,
+        background: "#08090a",
       });
     });
   };

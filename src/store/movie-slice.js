@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialMovies } from "./data";
 
 const movieSlice = createSlice({
   name: "movie",
@@ -32,27 +31,34 @@ const movieSlice = createSlice({
     setSearchContent(state, action) {
       state.searchContent = action.payload;
     },
-    filterSearchResults(state) {
-      let filteredContent = [...state.movies, ...state.series];
+    // filterSearchResults(state) {
+    //   let filteredContent = [...state.movies, ...state.series];
 
-      filteredContent = filteredContent.filter((item) => {
-        return (
-          item.title
-            .toUpperCase()
-            .includes(state.searchContent.toUpperCase()) ||
-          item.description
-            .toUpperCase()
-            .includes(state.searchContent.toUpperCase()) ||
-          item.cast.find((c) =>
-            c.toUpperCase().includes(state.searchContent.toUpperCase())
-          )
-        );
-      });
+    //   filteredContent = filteredContent.filter((item) => {
+    //     return (
+    //       item.title
+    //         .toUpperCase()
+    //         .includes(state.searchContent.toUpperCase()) ||
+    //       item.description
+    //         .toUpperCase()
+    //         .includes(state.searchContent.toUpperCase()) ||
+    //       item.cast.find((c) =>
+    //         c.toUpperCase().includes(state.searchContent.toUpperCase())
+    //       )
+    //     );
+    //   });
 
+    //   if (state.showMovies) {
+    //     state.movies = filteredContent;
+    //   } else if (state.showSeries) {
+    //     state.series = filteredContent;
+    //   }
+    // },
+    replaceContentAfterSearch(state, action) {
       if (state.showMovies) {
-        state.movies = filteredContent;
+        state.movies = action.payload.content;
       } else if (state.showSeries) {
-        state.series = filteredContent;
+        state.series = action.payload.content;
       }
     },
     resetSearchResults(state) {

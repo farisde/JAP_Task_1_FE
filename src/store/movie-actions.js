@@ -60,3 +60,38 @@ export const updateContentRating = (movieId, ratingValue) => {
     }
   };
 };
+
+export const sendSearchQuery = (searchPhrase) => {
+  return async (dispatch) => {
+    const postSearchPhrase = async () => {
+      const response = await fetch(
+        "https://localhost:5001/Movie/SendSearchResults",
+        {
+          method: "POST",
+          body: JSON.stringify({ searchPhrase }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong while fetching movie data!");
+      }
+
+      const allContent = await response.json();
+      return allContent.data;
+    };
+
+    try {
+      const allContent = await postSearchPhrase();
+      dispatch(
+        movieActions.replaceContentAfterSearch({
+          content: allContent || [],
+        })
+      );
+    } catch (error) {
+      console.log("sad zasad samo ovako", error);
+    }
+  };
+};
