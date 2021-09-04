@@ -62,26 +62,7 @@ const movieSlice = createSlice({
       } else if (state.showSeries) {
         state.series = state.allContent.filter((m) => !m.isMovie);
       }
-    },
-    updateMovieRating(state, action) {
-      let itemIndex = -1;
-      if (state.showMovies) {
-        itemIndex = state.movies.findIndex(
-          (item) => item.id == action.payload.itemId
-        );
-        state.movies[itemIndex].ratingList.push(action.payload.newRating);
-        state.movies[itemIndex].rating =
-          state.movies[itemIndex].ratingList.reduce((i1, i2) => i1 + i2, 0) /
-          state.movies[itemIndex].ratingList.length;
-      } else if (state.showSeries) {
-        itemIndex = state.series.findIndex(
-          (item) => item.id == action.payload.itemId
-        );
-        state.series[itemIndex].ratingList.push(action.payload.newRating);
-        state.series[itemIndex].rating =
-          state.series[itemIndex].ratingList.reduce((i1, i2) => i1 + i2, 0) /
-          state.series[itemIndex].ratingList.length;
-      }
+      state.searchContent = "";
     },
   },
 });

@@ -4,33 +4,30 @@ import StarRatingComponent from "react-star-rating-component";
 import classes from "./MovieItem.module.css";
 import { movieActions } from "../../store/movie-slice";
 import Swal from "sweetalert2";
+import { Rating } from "@material-ui/lab";
+import { updateContentRating } from "../../store/movie-actions";
 
 const MovieItem = (props) => {
   const dispatch = useDispatch();
 
-  const onStarClickHandler = (nextValue, prevValue, name) => {
-    dispatch(
-      movieActions.updateMovieRating({
-        itemId: props.movie.id,
-        newRating: prevValue,
-      })
-    );
+  const onStarClickHandler = (event, value) => {
+    dispatch(updateContentRating(props.movie.id, value)).then(() => {
+      const swalText = `You have successfully rated "<b>${props.movie.title}</b>" with <b>${value} star(s)</b>!`;
 
-    const swalText = `You have successfully rated "<b>${props.movie.title}</b>" with <b>${prevValue} star(s)</b>!`;
-
-    const customSwal = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-danger",
-      },
-    });
-    customSwal.fire({
-      title: "Thank you for your rating!",
-      html: swalText,
-      icon: "success",
-      backdrop: true,
-      showConfirmButton: true,
-      confirmButtonColor: "#800000",
-      focusConfirm: false,
+      const customSwal = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-danger",
+        },
+      });
+      customSwal.fire({
+        title: "Thank you for your rating!",
+        html: swalText,
+        icon: "success",
+        backdrop: true,
+        showConfirmButton: true,
+        confirmButtonColor: "#800000",
+        focusConfirm: false,
+      });
     });
   };
 
@@ -59,18 +56,18 @@ const MovieItem = (props) => {
           </p>
           <p>
             <b>Cast: </b>
-            {props.movie.cast.join(", ")}
+            {props.movie.cast.map((c) => c.name).join(", ")}
           </p>
         </span>
       </div>
       <div className={classes.rating}>
-        <StarRatingComponent
-          name={"contentRating"}
+        <Rating
+          name={props.movie.id.toString()}
           value={props.movie.rating}
-          starCount={5}
-          starColor={"#d40000"}
-          emptyStarColor={"#1D2124"}
-          onStarClick={onStarClickHandler.bind(null, this)}
+          size="large"
+          precision={0.5}
+          onChange={onStarClickHandler}
+          style={{ color: "#b50000" }}
         />
         &nbsp;
         <div className={classes.numberRating}>

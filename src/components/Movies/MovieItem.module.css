@@ -24,15 +24,13 @@
 }
 
 .rating {
-  z-index: 100000;
   display: flex;
   justify-content: center;
-  font-size: 2.25rem;
-  cursor: pointer;
+  align-items: center;
 }
 
 .numberRating {
-  font-size: 25px;
+  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;

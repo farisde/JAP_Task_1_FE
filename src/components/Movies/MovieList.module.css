@@ -14,18 +14,17 @@
 }
 
 .loadButton {
-  font-size: 23px;
+  font-size: 20px;
   background: transparent;
   border: none;
   outline: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   color: whitesmoke;
   transition: all ease-in-out 0.1s;
-  border-bottom: 2px solid transparent;
-  font-size: 25px;
-  width: 13rem;
-  background-color: #800000;
+  border-bottom: 2px solid rgba(187, 0, 0, 0.4);
+  width: 10rem;
+  background-color: #404346;
   border-radius: 14px;
   margin-top: 0.25rem;
   margin-bottom: 2rem;
@@ -33,4 +32,8 @@
 
 .loadButton:hover {
   background-color: rgba(128, 0, 0, 0.7);
+}
+
+ul {
+  list-style: none;
 }

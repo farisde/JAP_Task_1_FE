@@ -15,7 +15,7 @@ const MovieList = (props) => {
     <div className={classes.container}>
       <section className={classes.movies}>
         {contentListByRating.map((movie) => (
-          <Card key={movie.id}>
+          <Card key={movie.id.toString()}>
             <MovieItem movie={movie} />
           </Card>
         ))}
