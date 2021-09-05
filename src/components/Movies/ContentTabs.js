@@ -4,12 +4,16 @@ import MovieList from "./MovieList";
 import classes from "./ContentTabs.module.css";
 import { movieActions } from "../../store/movie-slice";
 import { fetchContentList } from "../../store/movie-actions";
+import Loading from "../UI/Loading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFrown } from "@fortawesome/free-regular-svg-icons";
 
 const ContentTabs = (props) => {
   const showMovies = useSelector((state) => state.movie.showMovies);
   const showSeries = useSelector((state) => state.movie.showSeries);
   const movies = useSelector((state) => state.movie.movies);
   const series = useSelector((state) => state.movie.series);
+  const contentIsLoading = useSelector((state) => state.movie.contentIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,8 +49,20 @@ const ContentTabs = (props) => {
           TV Shows
         </button>
       </div>
-      {showMovies && !showSeries && <MovieList contentList={movies} />}
-      {!showMovies && showSeries && <MovieList contentList={series} />}
+      {contentIsLoading && <Loading text={"Loading content"} />}
+      {!contentIsLoading && (series.length === 0 || movies.length === 0) && (
+        <div className={classes.noResults}>
+          <FontAwesomeIcon icon={faFrown} size="9x" />
+          <h2>No results found</h2>
+          <h4>We couldn't find any results matching your input</h4>
+        </div>
+      )}
+      {showMovies && !showSeries && !contentIsLoading && (
+        <MovieList contentList={movies} />
+      )}
+      {!showMovies && showSeries && !contentIsLoading && (
+        <MovieList contentList={series} />
+      )}
     </Fragment>
   );
 };

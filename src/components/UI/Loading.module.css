@@ -1,0 +1,10 @@
+.text {
+  color: whitesmoke;
+  padding-top: 5rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

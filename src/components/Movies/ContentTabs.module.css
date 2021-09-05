@@ -37,3 +37,12 @@
 .toggleHover:hover {
   background-color: rgba(69, 73, 77, 1);
 }
+
+.noResults {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  margin-top: 2rem;
+}

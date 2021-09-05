@@ -9,12 +9,14 @@ const movieSlice = createSlice({
     showMovies: true,
     showSeries: false,
     searchContent: "",
+    contentIsLoading: true,
   },
   reducers: {
     replaceContentList(state, action) {
       state.allContent = action.payload.content;
       state.movies = action.payload.content.filter((m) => m.isMovie);
       state.series = action.payload.content.filter((m) => !m.isMovie);
+      state.contentIsLoading = false;
     },
     showMovies(state) {
       if (!state.showMovies) {
@@ -29,45 +31,34 @@ const movieSlice = createSlice({
       }
     },
     setSearchContent(state, action) {
-      state.searchContent = action.payload;
+      if (state.searchContent !== "") {
+        if (!state.contentIsLoading) {
+          state.contentIsLoading = true;
+        }
+        state.searchContent = action.payload;
+      } else {
+        state.searchContent = action.payload;
+        state.contentIsLoading = false;
+      }
     },
-    // filterSearchResults(state) {
-    //   let filteredContent = [...state.movies, ...state.series];
-
-    //   filteredContent = filteredContent.filter((item) => {
-    //     return (
-    //       item.title
-    //         .toUpperCase()
-    //         .includes(state.searchContent.toUpperCase()) ||
-    //       item.description
-    //         .toUpperCase()
-    //         .includes(state.searchContent.toUpperCase()) ||
-    //       item.cast.find((c) =>
-    //         c.toUpperCase().includes(state.searchContent.toUpperCase())
-    //       )
-    //     );
-    //   });
-
-    //   if (state.showMovies) {
-    //     state.movies = filteredContent;
-    //   } else if (state.showSeries) {
-    //     state.series = filteredContent;
-    //   }
-    // },
     replaceContentAfterSearch(state, action) {
       if (state.showMovies) {
         state.movies = action.payload.content;
       } else if (state.showSeries) {
         state.series = action.payload.content;
       }
+      state.contentIsLoading = false;
+    },
+    setContentLoading(state, action) {
+      state.contentIsLoading = action.payload;
     },
     resetSearchResults(state) {
       //sa BackEnda trebas vratiti friskih top 10 filmova ili serija. tako je najlakse da ne komplikujes ovaj dio!
-      if (state.showMovies) {
-        state.movies = state.allContent.filter((m) => m.isMovie);
-      } else if (state.showSeries) {
-        state.series = state.allContent.filter((m) => !m.isMovie);
-      }
+      // if (state.showMovies) {
+      //   state.movies = state.allContent.filter((m) => m.isMovie);
+      // } else if (state.showSeries) {
+      //   state.series = state.allContent.filter((m) => !m.isMovie);
+      // }
       state.searchContent = "";
     },
   },
