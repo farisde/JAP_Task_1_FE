@@ -5,4 +5,6 @@
   background-color: rgba(167, 167, 167, 0.25);
   margin: 0.5rem auto;
   color: whitesmoke;
+  border-bottom: 1px solid #800000;
+  border-right: 1px solid #800000;
 }

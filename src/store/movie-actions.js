@@ -18,6 +18,7 @@ export const fetchContentList = () => {
       dispatch(
         movieActions.replaceContentList({
           content: allContent || [],
+          newRatingsRecieved: false,
         })
       );
     } catch (error) {
@@ -53,6 +54,7 @@ export const updateContentRating = (movieId, ratingValue) => {
       dispatch(
         movieActions.replaceContentList({
           content: allContent || [],
+          newRatingsRecieved: true,
         })
       );
     } catch (error) {

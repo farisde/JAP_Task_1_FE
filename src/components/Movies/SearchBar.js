@@ -20,7 +20,6 @@ const SearchBar = (props) => {
       if (searchContent.length === 0) {
         dispatch(fetchContentList()).then(() => {
           dispatch(movieActions.resetSearchResults());
-          dispatch(fetchContentList());
         });
       }
     }, 650);

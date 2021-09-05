@@ -5,8 +5,8 @@ import classes from "./ContentTabs.module.css";
 import { movieActions } from "../../store/movie-slice";
 import { fetchContentList } from "../../store/movie-actions";
 import Loading from "../UI/Loading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFrown } from "@fortawesome/free-regular-svg-icons";
+import NoSearchResults from "./NoSearchResults";
 
 const ContentTabs = (props) => {
   const showMovies = useSelector((state) => state.movie.showMovies);
@@ -14,6 +14,7 @@ const ContentTabs = (props) => {
   const movies = useSelector((state) => state.movie.movies);
   const series = useSelector((state) => state.movie.series);
   const contentIsLoading = useSelector((state) => state.movie.contentIsLoading);
+  const searchContent = useSelector((state) => state.movie.searchContent);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +28,12 @@ const ContentTabs = (props) => {
   const handlSeriesTabClick = () => {
     dispatch(movieActions.showSeries());
   };
+
+  const showNotFound =
+    !contentIsLoading &&
+    ((series.length === 0 && showSeries) ||
+      (movies.length === 0 && showMovies)) &&
+    searchContent.length > 1;
 
   return (
     <Fragment>
@@ -50,18 +57,27 @@ const ContentTabs = (props) => {
         </button>
       </div>
       {contentIsLoading && <Loading text={"Loading content"} />}
-      {!contentIsLoading && (series.length === 0 || movies.length === 0) && (
-        <div className={classes.noResults}>
-          <FontAwesomeIcon icon={faFrown} size="9x" />
-          <h2>No results found</h2>
-          <h4>We couldn't find any results matching your input</h4>
-        </div>
+      {showNotFound && (
+        <NoSearchResults
+          title={"No results found"}
+          description={"We couldn't find any results matching your input"}
+          icon={faFrown}
+          iconSize={"9x"}
+        />
       )}
       {showMovies && !showSeries && !contentIsLoading && (
-        <MovieList contentList={movies} />
+        <MovieList
+          contentList={movies}
+          noResultsFound={showNotFound}
+          isMovie={true}
+        />
       )}
       {!showMovies && showSeries && !contentIsLoading && (
-        <MovieList contentList={series} />
+        <MovieList
+          contentList={series}
+          noResultsFound={showNotFound}
+          isMovie={false}
+        />
       )}
     </Fragment>
   );
