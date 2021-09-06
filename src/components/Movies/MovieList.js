@@ -23,7 +23,7 @@ const MovieList = (props) => {
           searchContent !== ""
       ).length > visibleMovies
     ) {
-      dispatch(movieActions.increaseVisibleMovies(1));
+      dispatch(movieActions.increaseVisibleMovies());
     }
   };
 

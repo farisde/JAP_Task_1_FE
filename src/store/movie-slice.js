@@ -10,13 +10,13 @@ const movieSlice = createSlice({
     showSeries: false,
     searchContent: "",
     contentIsLoading: true,
-    visibleMovies: 1,
+    visibleMovies: 10,
     showLoadContentButton: true,
   },
   reducers: {
     replaceContentList(state, action) {
       if (!action.payload.newRatingsRecieved) {
-        state.visibleMovies = 1;
+        state.visibleMovies = 10;
       }
       state.allContent = action.payload.content;
       state.movies = action.payload.content
@@ -34,7 +34,7 @@ const movieSlice = createSlice({
       if (!state.showMovies) {
         state.showMovies = !state.showMovies;
         state.showSeries = !state.showSeries;
-        state.visibleMovies = 1;
+        state.visibleMovies = 10;
         state.movies = state.movies.slice(0, state.visibleMovies);
         if (state.movies.length <= state.visibleMovies) {
           state.showLoadContentButton = true;
@@ -47,7 +47,7 @@ const movieSlice = createSlice({
       if (!state.showSeries) {
         state.showSeries = !state.showSeries;
         state.showMovies = !state.showMovies;
-        state.visibleMovies = 1;
+        state.visibleMovies = 10;
         state.series = state.series.slice(0, state.visibleMovies);
         if (state.series.length <= state.visibleMovies) {
           state.showLoadContentButton = true;
@@ -69,7 +69,7 @@ const movieSlice = createSlice({
     },
     replaceContentAfterSearch(state, action) {
       state.allContent = action.payload.content;
-      state.visibleMovies = 1;
+      state.visibleMovies = 10;
       if (state.allContent.length <= state.visibleMovies) {
         state.showLoadContentButton = false;
       } else {
@@ -86,34 +86,32 @@ const movieSlice = createSlice({
       state.contentIsLoading = action.payload;
     },
     increaseVisibleMovies(state, action) {
-      state.visibleMovies += action.payload;
+      state.visibleMovies += 10;
       if (state.showMovies) {
-        state.movies = state.allContent
-          .filter(
-            (m) =>
-              (m.isMovie && state.searchContent === "") ||
-              state.searchContent !== ""
-          )
-          .slice(0, state.visibleMovies);
-        if (state.movies.length <= state.visibleMovies) {
+        const filteredContent = state.allContent.filter(
+          (m) =>
+            (m.isMovie && state.searchContent === "") ||
+            state.searchContent !== ""
+        );
+        if (filteredContent.length <= state.visibleMovies) {
           state.showLoadContentButton = false;
         }
+        state.movies = filteredContent.slice(0, state.visibleMovies);
       } else if (state.showSeries) {
-        state.series = state.allContent
-          .filter(
-            (m) =>
-              (!m.isMovie && state.searchContent === "") ||
-              state.searchContent !== ""
-          )
-          .slice(0, state.visibleMovies);
-        if (state.series.length <= state.visibleMovies) {
+        const filteredContent = state.allContent.filter(
+          (m) =>
+            (!m.isMovie && state.searchContent === "") ||
+            state.searchContent !== ""
+        );
+        if (filteredContent.length <= state.visibleMovies) {
           state.showLoadContentButton = false;
         }
+        state.series = filteredContent.slice(0, state.visibleMovies);
       }
     },
     resetSearchResults(state) {
       state.searchContent = "";
-      state.visibleMovies = 1;
+      state.visibleMovies = 10;
       state.showLoadContentButton = true;
     },
     setShowLoadContentButton(state, action) {

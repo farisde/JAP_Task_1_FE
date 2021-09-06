@@ -57,6 +57,7 @@ export const updateContentRating = (movieId, ratingValue) => {
           newRatingsRecieved: true,
         })
       );
+      dispatch(movieActions.resetSearchResults());
     } catch (error) {
       console.log("sad zasad samo ovako", error);
     }

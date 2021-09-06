@@ -40,6 +40,7 @@ const SearchBar = (props) => {
           type="text"
           name="searchQueryInput"
           placeholder="Search favorite Movies and TV Shows"
+          value={searchContent}
           onChange={handleSearchInput}
         />
         <button
