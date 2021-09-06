@@ -10,11 +10,10 @@ const MovieItem = (props) => {
   const [ratingValue, setRatingValue] = useState(props.movie.rating);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setRatingValue(props.movie.rating);
-  }, [props.movie.rating]);
+  const onStarClickHandler = (event) => {
+    let value = event.target.value;
+    if (value < 0 || value > 5 || value == null || value === undefined) return;
 
-  const onStarClickHandler = (event, value) => {
     dispatch(updateContentRating(props.movie.id, value)).then(() => {
       const swalText = `<div style='color:whitesmoke'>You have successfully rated "<b>${props.movie.title}</b>" with <b>${value} star(s)</b>!</div>`;
       Swal.fire({
@@ -61,8 +60,8 @@ const MovieItem = (props) => {
       </div>
       <div className={classes.rating}>
         <Rating
-          name={props.movie.id.toString()}
-          value={ratingValue}
+          name={`movie-id-${props.movie.id}`}
+          value={props.movie.rating}
           size="large"
           precision={0.5}
           onChange={onStarClickHandler}
