@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.submitButton {
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  color: whitesmoke;
+  transition: all ease-in-out 0.1s;
+  border-bottom: 2px solid rgba(187, 0, 0, 0.4);
+  width: 10rem;
+  background-color: #1d2125;
+  border-radius: 14px;
+  margin: 1.5rem auto;
+}
+
+.submitButton:hover {
+  background-color: rgba(128, 0, 0, 0.7);
+}
+
+.inputFieldName {
+  margin-left: 2rem !important;
+  margin-right: 2rem !important;
+  margin-top: 2rem !important;
+}
+
+.inputFieldEmail {
+  margin-right: 2rem !important;
+  margin-top: 2rem !important;
+}
+
+.inputFieldPassword {
+  margin-left: 2rem !important;
+  margin-top: 2rem !important;
+}
+
+.inputText {
+  color: whitesmoke !important;
+}
+
+.formActions {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem auto;
+  margin-bottom: -0.25rem;
+}
+
+.form {
+  background-color: rgba(254, 254, 254, 0.75);
+  margin: 1.5rem auto;
+  border-radius: 14px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: whitesmoke !important;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin: 0 !important;
+  color: #1d2125;
+}
+
+.closeButton {
+  transform: translate(31.5rem, -1.75rem);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.closeButton:hover {
+  background-color: rgba(187, 0, 0, 0.4);
+}

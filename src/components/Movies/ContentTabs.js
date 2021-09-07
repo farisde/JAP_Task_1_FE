@@ -41,7 +41,9 @@ const ContentTabs = (props) => {
         <h2>Browse top rated</h2>
         <button
           className={`${classes.tabButton} ${
-            showMovies ? classes.active : classes.toggleHover
+            showMovies && searchContent === ""
+              ? classes.active
+              : classes.toggleHover
           }`}
           onClick={handleMoviesTabClick}
         >
@@ -49,7 +51,9 @@ const ContentTabs = (props) => {
         </button>
         <button
           className={`${classes.tabButton} ${
-            showSeries ? classes.active : classes.toggleHover
+            showSeries && searchContent === ""
+              ? classes.active
+              : classes.toggleHover
           }`}
           onClick={handlSeriesTabClick}
         >
