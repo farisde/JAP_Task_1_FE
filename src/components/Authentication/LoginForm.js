@@ -1,24 +1,50 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./LoginForm.module.css";
 import { authActions } from "../../store/auth-slice";
 import { createTheme, ThemeProvider } from "@material-ui/core";
+import { sendLoginUserRequest } from "../../store/auth-actions";
 
 const LoginForm = (props) => {
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [formIsValid, setFormIsValid] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (enteredPassword !== "" && enteredEmail !== "") {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  }, [enteredPassword, enteredEmail]);
 
   const submitRegisterHandler = (event) => {
     event.preventDefault();
+
+    if (formIsValid) {
+      dispatch(sendLoginUserRequest(enteredEmail, enteredPassword));
+    }
   };
 
   const handleCloseForm = () => {
     dispatch(authActions.setShowLoginForm(false));
   };
 
+  const handleEmailChange = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setEnteredPassword(event.target.value);
+  };
+
   const darkTheme = createTheme({ palette: { type: "dark" } });
+
+  const disabledButton = formIsValid ? "" : classes.disabledButton;
 
   return (
     <div className={classes.container}>
@@ -34,8 +60,8 @@ const LoginForm = (props) => {
               label="Email Address"
               variant="outlined"
               type="email"
-              value={props.value}
-              onChange={props.onChange}
+              value={enteredEmail}
+              onChange={handleEmailChange}
               className={(classes.inputText, classes.inputFieldEmail)}
             />
             <TextField
@@ -44,14 +70,16 @@ const LoginForm = (props) => {
               variant="outlined"
               type="password"
               autoComplete="current-password"
-              value={props.value}
-              onChange={props.onChange}
+              value={enteredPassword}
+              onChange={handlePasswordChange}
               className={(classes.inputText, classes.inputFieldPassword)}
             />
           </div>
         </ThemeProvider>
         <div className={classes.formActions}>
-          <button className={classes.submitButton}>Sign In</button>
+          <button className={`${classes.submitButton} ${disabledButton}`}>
+            Sign In
+          </button>
         </div>
       </form>
     </div>

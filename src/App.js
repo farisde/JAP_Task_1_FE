@@ -9,14 +9,15 @@ import SearchBar from "./components/Movies/SearchBar";
 function App() {
   const showLoginForm = useSelector((state) => state.auth.showLoginForm);
   const showRegisterForm = useSelector((state) => state.auth.showRegisterForm);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
     <Fragment>
       <Header />
       {!showLoginForm && !showRegisterForm && <SearchBar />}
       {!showLoginForm && !showRegisterForm && <ContentTabs />}
-      {!showLoginForm && showRegisterForm && <RegisterForm />}
-      {showLoginForm && !showRegisterForm && <LoginForm />}
+      {!isLoggedIn && !showLoginForm && showRegisterForm && <RegisterForm />}
+      {!isLoggedIn && showLoginForm && !showRegisterForm && <LoginForm />}
     </Fragment>
   );
 }

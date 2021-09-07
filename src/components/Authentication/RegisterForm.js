@@ -1,8 +1,7 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createTheme, TextField } from "@material-ui/core";
-import { dark } from "@material-ui/core/styles/createPalette";
-import React, { useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { sendRegisterUserRequest } from "../../store/auth-actions";
 import { authActions } from "../../store/auth-slice";
@@ -10,10 +9,19 @@ import classes from "./RegisterForm.module.css";
 import { ThemeProvider } from "@material-ui/core";
 
 const RegisterForm = (props) => {
-  const enteredNameRef = useRef();
-  const enteredEmailRef = useRef();
-  const enteredPasswordRef = useRef();
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [formIsValid, setFormIsValid] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (enteredName !== "" && enteredPassword !== "" && enteredEmail !== "") {
+      setFormIsValid(true);
+    } else {
+      setFormIsValid(false);
+    }
+  }, [enteredName, enteredPassword, enteredEmail]);
 
   const handleCloseForm = () => {
     dispatch(authActions.setShowRegisterForm(false));
@@ -22,18 +30,28 @@ const RegisterForm = (props) => {
   const submitRegisterHandler = (event) => {
     event.preventDefault();
 
-    console.log("submitao sam");
+    if (formIsValid) {
+      dispatch(
+        sendRegisterUserRequest(enteredName, enteredEmail, enteredPassword)
+      );
+    }
+  };
 
-    const enteredName = enteredNameRef.current.value;
-    const enteredEmail = enteredEmailRef.current.value;
-    const enteredPassword = enteredPasswordRef.current.value;
+  const handleNameChange = (event) => {
+    setEnteredName(event.target.value);
+  };
 
-    dispatch(
-      sendRegisterUserRequest(enteredName, enteredEmail, enteredPassword)
-    );
+  const handleEmailChange = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setEnteredPassword(event.target.value);
   };
 
   const darkTheme = createTheme({ palette: { type: "dark" } });
+
+  const disabledButton = formIsValid ? "" : classes.disabledButton;
 
   return (
     <div className={classes.container}>
@@ -48,8 +66,8 @@ const RegisterForm = (props) => {
               id="outlined-required"
               label="Name"
               variant="outlined"
-              ref={enteredNameRef}
-              onChange={props.onChange}
+              value={enteredName}
+              onChange={handleNameChange}
               className={classes.inputFieldName}
             />
             <TextField
@@ -57,7 +75,8 @@ const RegisterForm = (props) => {
               label="Email Address"
               variant="outlined"
               type="email"
-              ref={enteredEmailRef}
+              value={enteredEmail}
+              onChange={handleEmailChange}
               className={(classes.inputText, classes.inputFieldEmail)}
             />
           </div>
@@ -68,12 +87,15 @@ const RegisterForm = (props) => {
               variant="outlined"
               type="password"
               autoComplete="current-password"
-              ref={enteredPasswordRef}
+              onChange={handlePasswordChange}
+              value={enteredPassword}
             />
           </div>
         </ThemeProvider>
         <div className={classes.formActions}>
-          <button className={classes.submitButton}>Sign Up</button>
+          <button className={`${classes.submitButton} ${disabledButton}`}>
+            Sign Up
+          </button>
         </div>
       </form>
     </div>

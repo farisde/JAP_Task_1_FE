@@ -22,9 +22,9 @@ const MovieItem = (props) => {
         icon: "success",
         backdrop: true,
         showConfirmButton: true,
-        confirmButtonColor: "#800000",
+        confirmButtonColor: "#eb0028",
         focusConfirm: false,
-        background: "#08090a",
+        background: "#2C2C2C",
       });
     });
   };

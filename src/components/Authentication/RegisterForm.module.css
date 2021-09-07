@@ -22,6 +22,10 @@
   margin: 1.5rem auto;
 }
 
+.disabledButton {
+  cursor: not-allowed;
+}
+
 .submitButton:hover {
   background-color: rgba(235, 0, 40, 0.7);
 }
