@@ -5,7 +5,7 @@
   text-align: center;
   margin-top: 2rem;
   border-radius: 14px;
-  border-bottom: 2px solid #800000;
+  border-bottom: 2px solid #eb0028;
   color: whitesmoke;
 }
 
@@ -31,9 +31,9 @@
 }
 
 .active {
-  background-color: rgba(187, 0, 0, 0.4);
+  background-color: rgba(235, 0, 40, 1);
 }
 
 .toggleHover:hover {
-  background-color: rgba(69, 73, 77, 1);
+  background-color: #2a2a2a;
 }

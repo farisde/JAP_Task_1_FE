@@ -22,16 +22,16 @@
   cursor: pointer;
   color: whitesmoke;
   transition: all ease-in-out 0.1s;
-  border-bottom: 2px solid rgba(187, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(235, 0, 40, 1);
   width: 10rem;
-  background-color: #404346;
+  background-color: #2a2a2a;
   border-radius: 14px;
   margin-top: 0.25rem;
   margin-bottom: 2rem;
 }
 
 .loadButton:hover {
-  background-color: rgba(128, 0, 0, 0.7);
+  background-color: rgba(235, 0, 40, 0.7);
 }
 
 ul {

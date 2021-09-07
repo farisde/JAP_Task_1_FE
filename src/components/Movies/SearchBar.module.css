@@ -24,14 +24,14 @@
 .searchQueryInput {
   width: 100%;
   height: 2.8rem;
-  background: #45494d;
+  background: #2a2a2a;
   outline: none;
   border: none;
   border-radius: 1.625rem;
   padding: 0 3.5rem 0 1.5rem;
   font-size: 1.25rem;
   color: whitesmoke;
-  border-bottom: 2px solid #800000;
+  border-bottom: 2px solid #eb0028;
 }
 
 .searchQuerySubmit {
@@ -48,5 +48,5 @@
 }
 
 .icon {
-  color: white;
+  color: whitesmoke;
 }

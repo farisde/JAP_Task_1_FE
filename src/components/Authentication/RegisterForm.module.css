@@ -15,15 +15,15 @@
   cursor: pointer;
   color: whitesmoke;
   transition: all ease-in-out 0.1s;
-  border-bottom: 3px solid rgba(167, 167, 167, 0.863);
+  border-bottom: 1px solid rgba(235, 0, 40, 1);
   width: 10rem;
-  background-color: #1d2125;
+  background-color: #1e1e1e;
   border-radius: 14px;
   margin: 1.5rem auto;
 }
 
 .submitButton:hover {
-  background-color: rgba(128, 0, 0, 0.7);
+  background-color: rgba(235, 0, 40, 0.7);
 }
 
 .inputFieldName {
@@ -56,7 +56,7 @@
 }
 
 .form {
-  background-color: white;
+  background-color: #2a2a2a;
   margin: 1.5rem auto;
   border-radius: 14px;
 }
@@ -69,7 +69,7 @@
   display: flex;
   justify-content: center;
   margin: 0 !important;
-  color: #1d2125;
+  color: whitesmoke;
 }
 
 .closeButton {
@@ -82,5 +82,9 @@
 }
 
 .closeButton:hover {
-  background-color: rgba(167, 167, 167, 0.5);
+  background-color: rgba(235, 0, 40, 0.7);
+}
+
+.icon {
+  color: whitesmoke;
 }

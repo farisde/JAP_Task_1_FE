@@ -32,13 +32,28 @@ const MovieItem = (props) => {
   return (
     <Fragment>
       <div className={classes.movie}>
-        <span className={`${classes.spanImage} ${classes.spanContent}`}>
-          <img
-            className={classes.coverPhoto}
-            src={props.movie.coverImage}
-            alt="Movie Cover"
-          />
-        </span>
+        <div>
+          <span className={`${classes.spanImage} ${classes.spanContent}`}>
+            <img
+              className={classes.coverPhoto}
+              src={props.movie.coverImage}
+              alt="Movie Cover"
+            />
+          </span>
+          <div className={classes.controls}>
+            <Rating
+              name={`movie-id-${props.movie.id}`}
+              value={props.movie.rating}
+              size="large"
+              precision={0.5}
+              onChange={onStarClickHandler}
+              style={{ color: "#eb0028" }}
+            />
+            <div className={classes.numberRating}>
+              <b>{props.movie.rating.toFixed(1)}</b> /5
+            </div>
+          </div>
+        </div>
         <span className={`${classes.spanConten} ${classes.scrollableInfo}`}>
           <h3>{props.movie.title}</h3>
           <p>{props.movie.description}</p>
@@ -58,22 +73,7 @@ const MovieItem = (props) => {
           </p>
         </span>
       </div>
-      <div className={classes.rating}>
-        <div className={classes.controls}>
-          <Rating
-            name={`movie-id-${props.movie.id}`}
-            value={props.movie.rating}
-            size="large"
-            precision={0.5}
-            onChange={onStarClickHandler}
-            style={{ color: "#b50000" }}
-          />
-          &nbsp;
-          <div className={classes.numberRating}>
-            <b>{props.movie.rating.toFixed(1)}</b> /5
-          </div>
-        </div>
-      </div>
+      <div className={classes.rating}></div>
     </Fragment>
   );
 };
