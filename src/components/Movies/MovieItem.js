@@ -39,7 +39,7 @@ const MovieItem = (props) => {
             alt="Movie Cover"
           />
         </span>
-        <span className={classes.spanConten}>
+        <span className={`${classes.spanConten} ${classes.scrollableInfo}`}>
           <h3>{props.movie.title}</h3>
           <p>{props.movie.description}</p>
           <p>
@@ -59,17 +59,19 @@ const MovieItem = (props) => {
         </span>
       </div>
       <div className={classes.rating}>
-        <Rating
-          name={`movie-id-${props.movie.id}`}
-          value={props.movie.rating}
-          size="large"
-          precision={0.5}
-          onChange={onStarClickHandler}
-          style={{ color: "#b50000" }}
-        />
-        &nbsp;
-        <div className={classes.numberRating}>
-          <b>{props.movie.rating.toFixed(1)}</b> /5
+        <div className={classes.controls}>
+          <Rating
+            name={`movie-id-${props.movie.id}`}
+            value={props.movie.rating}
+            size="large"
+            precision={0.5}
+            onChange={onStarClickHandler}
+            style={{ color: "#b50000" }}
+          />
+          &nbsp;
+          <div className={classes.numberRating}>
+            <b>{props.movie.rating.toFixed(1)}</b> /5
+          </div>
         </div>
       </div>
     </Fragment>

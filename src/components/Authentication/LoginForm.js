@@ -2,18 +2,26 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField } from "@material-ui/core";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./LoginForm.module.css";
+import { authActions } from "../../store/auth-slice";
 
 const LoginForm = (props) => {
+  const dispatch = useDispatch();
+
   const submitRegisterHandler = (event) => {
     event.preventDefault();
+  };
+
+  const handleCloseForm = () => {
+    dispatch(authActions.setShowLoginForm(false));
   };
 
   return (
     <div className={classes.container}>
       <form className={classes.form} onSubmit={submitRegisterHandler}>
         <h2 className={classes.title}>Sign In</h2>
-        <button className={classes.closeButton}>
+        <button className={classes.closeButton} onClick={handleCloseForm}>
           <FontAwesomeIcon icon={faTimes} size="2x" />
         </button>
         <div className={classes.input}>

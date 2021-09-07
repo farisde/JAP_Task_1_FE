@@ -15,7 +15,7 @@
   cursor: pointer;
   color: whitesmoke;
   transition: all ease-in-out 0.1s;
-  border-bottom: 2px solid rgba(187, 0, 0, 0.4);
+  border-bottom: 3px solid rgba(167, 167, 167, 0.863);
   width: 10rem;
   background-color: #1d2125;
   border-radius: 14px;
@@ -56,7 +56,7 @@
 }
 
 .form {
-  background-color: rgba(254, 254, 254, 0.75);
+  background-color: white;
   margin: 1.5rem auto;
   border-radius: 14px;
 }
@@ -82,5 +82,5 @@
 }
 
 .closeButton:hover {
-  background-color: rgba(187, 0, 0, 0.4);
+  background-color: rgba(167, 167, 167, 0.5);
 }

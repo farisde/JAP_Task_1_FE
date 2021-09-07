@@ -8,10 +8,16 @@ const authSlice = createSlice({
   },
   reducers: {
     setShowLoginForm(state, action) {
-      state.isLoginForm = action.payload;
+      if (state.showRegisterForm) {
+        state.showRegisterForm = false;
+      }
+      state.showLoginForm = action.payload;
     },
     setShowRegisterForm(state, action) {
-      state.isLoginForm = action.payload;
+      if (state.showLoginForm) {
+        state.showLoginForm = false;
+      }
+      state.showRegisterForm = action.payload;
     },
   },
 });
