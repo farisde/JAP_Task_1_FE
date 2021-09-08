@@ -18,3 +18,4 @@ This is the FrontEnd repository for a movie rating app - MovieBuff similair to I
 - Search includes special phrases such as: "5 stars", "at least 3 stars", "after 2015", "older than 3 years"
 - Rate any Movie/TV Show with 1-5 stats
 - Load more Movies/TV Shows (increments of 10)
+- Users can Login or Sign Up for an account
