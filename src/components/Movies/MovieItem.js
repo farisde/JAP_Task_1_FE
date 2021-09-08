@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import classes from "./MovieItem.module.css";
 import Swal from "sweetalert2";
@@ -7,7 +7,6 @@ import { updateContentRating } from "../../store/movie-actions";
 import "./SwalStyle.css";
 
 const MovieItem = (props) => {
-  const [ratingValue, setRatingValue] = useState(props.movie.rating);
   const dispatch = useDispatch();
 
   const onStarClickHandler = (event) => {
@@ -73,7 +72,6 @@ const MovieItem = (props) => {
           </p>
         </span>
       </div>
-      <div className={classes.rating}></div>
     </Fragment>
   );
 };

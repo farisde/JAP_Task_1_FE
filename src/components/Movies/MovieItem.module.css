@@ -56,3 +56,9 @@ h3 {
   padding-bottom: 5px;
   border-bottom: 2px solid #eb0028;
 }
+
+@media screen and (max-width: 640px) {
+  .movie {
+    width: 24rem;
+  }
+}

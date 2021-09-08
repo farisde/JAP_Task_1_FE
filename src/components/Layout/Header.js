@@ -23,7 +23,9 @@ const Header = () => {
   return (
     <Fragment>
       <header className={classes.header}>
-        <h1>MovieBuff</h1>
+        <div className={classes.headerGridChilds}>
+          <div className={classes.appTitle}>MovieBuff</div>
+        </div>
         {!isLoggedIn && (
           <div className={classes.authAction}>
             <h2 className={classes.signInButton} onClick={handleSignInClick}>

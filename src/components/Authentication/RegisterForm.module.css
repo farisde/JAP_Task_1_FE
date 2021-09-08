@@ -92,3 +92,20 @@
 .icon {
   color: whitesmoke;
 }
+
+@media screen and (max-width: 640px) {
+  .input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .inputFieldEmail {
+    margin-right: 0 !important;
+  }
+
+  .closeButton {
+    transform: translate(15.75rem, -1.75rem);
+  }
+}

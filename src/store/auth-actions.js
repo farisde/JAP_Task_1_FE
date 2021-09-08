@@ -37,6 +37,7 @@ export const sendRegisterUserRequest = (name, email, password) => {
 
     try {
       const userId = await registerUserRequest();
+      console.log(userId);
     } catch (error) {}
   };
 };

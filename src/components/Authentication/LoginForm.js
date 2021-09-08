@@ -2,7 +2,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import classes from "./LoginForm.module.css";
 import { authActions } from "../../store/auth-slice";
 import { createTheme, ThemeProvider } from "@material-ui/core";
@@ -62,7 +62,7 @@ const LoginForm = (props) => {
               type="email"
               value={enteredEmail}
               onChange={handleEmailChange}
-              className={(classes.inputText, classes.inputFieldEmail)}
+              className={`${classes.inputText} ${classes.inputFieldEmail}`}
             />
             <TextField
               id="outlined-required"
@@ -72,7 +72,7 @@ const LoginForm = (props) => {
               autoComplete="current-password"
               value={enteredPassword}
               onChange={handlePasswordChange}
-              className={(classes.inputText, classes.inputFieldPassword)}
+              className={`${classes.inputText} ${classes.inputFieldPassword}`}
             />
           </div>
         </ThemeProvider>

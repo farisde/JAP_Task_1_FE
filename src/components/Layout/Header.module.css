@@ -6,18 +6,31 @@
   height: 5rem;
   background-color: #eb0028;
   color: white;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 5rem;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 10;
 }
 
-.authAction {
-  position: fixed;
-  top: 0.25rem;
-  right: 0;
+.headerGridChilds {
+  height: 5rem;
+}
+
+.appTitle {
+  font-size: 1.75rem;
   display: flex;
   align-items: center;
+  margin-left: 3%;
+  margin-top: 1.3rem;
+}
+
+.authAction {
+  /*position: fixed;
+  top: 0.25rem;
+  right: 0;*/
+  display: flex;
   justify-content: flex-end;
 }
 
@@ -29,7 +42,6 @@ h1 {
 .signUpButton {
   width: 7rem;
   margin-left: 0.75rem;
-  justify-content: center;
 }
 
 .signInButton:hover,
@@ -48,6 +60,7 @@ h1 {
 .welcomeText {
   width: 9rem;
   justify-content: center;
+  margin-top: 1.5rem;
 }
 
 .signOutButton {
@@ -55,4 +68,42 @@ h1 {
   padding-left: 1rem;
   justify-content: center;
   border-left: 1px solid whitesmoke;
+}
+
+@media screen and (max-width: 640px) {
+  .header {
+    width: 100% !important;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .signInButton {
+    max-width: 4.8rem;
+  }
+
+  .signUpButton {
+    max-width: 4.8rem;
+  }
+
+  .signInButton,
+  .signUpButton {
+    font-size: clamp(1rem, 1rem + 1vw, 3rem);
+  }
+
+  .signOutButton {
+    max-width: 5em;
+    font-size: 1.5rem;
+  }
+
+  .welcomeText {
+    width: fit-content;
+    margin-right: 0.5rem;
+    margin-top: 1.5rem;
+  }
 }

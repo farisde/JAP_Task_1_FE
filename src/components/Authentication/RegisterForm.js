@@ -77,7 +77,7 @@ const RegisterForm = (props) => {
               type="email"
               value={enteredEmail}
               onChange={handleEmailChange}
-              className={(classes.inputText, classes.inputFieldEmail)}
+              className={`${classes.inputText} ${classes.inputFieldEmail}`}
             />
           </div>
           <div className={classes.inputFieldPassword}>
