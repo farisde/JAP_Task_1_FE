@@ -1,12 +1,13 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MovieList from "./MovieList";
+import MediaList from "./MediaList";
 import classes from "./ContentTabs.module.css";
 import { movieActions } from "../../store/movie-slice";
-import { fetchContentList } from "../../store/movie-actions";
-import Loading from "../UI/Loading";
+import { fetchMediaList } from "../../store/movie-actions";
+import Loading from "../Shared/Loading";
 import { faFrown } from "@fortawesome/free-regular-svg-icons";
 import NoSearchResults from "./NoSearchResults";
+import { useQuery } from "react-query";
 
 const ContentTabs = (props) => {
   const showMovies = useSelector((state) => state.movie.showMovies);
@@ -17,16 +18,30 @@ const ContentTabs = (props) => {
   const searchContent = useSelector((state) => state.movie.searchContent);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContentList());
-  }, [dispatch]);
+  const contentList = useSelector((state) => state.movie.contentList);
+  const toggleContent = useSelector((state) => state.movie.toggleContent);
+  const pageNumber = useSelector((state) => state.movie.pageNumber);
+
+  const moviesResponse = useQuery("movies", () =>
+    fetchMediaList({ mediaType: 1, pageNumber })
+  );
+
+  const seriesResponse = useQuery("series", () =>
+    fetchMediaList({ mediaType: 2, pageNumber })
+  );
+
+  // useEffect(() => {
+  //   if (toggleContent === "Movies") {
+  //     dispatch(movieActions.setContentList(moviesResponse));
+  //   }
+  // }, [toggleContent]);
 
   const handleMoviesTabClick = () => {
-    dispatch(movieActions.showMovies());
+    dispatch(movieActions.setToggleContent("Movies"));
   };
 
   const handlSeriesTabClick = () => {
-    dispatch(movieActions.showSeries());
+    dispatch(movieActions.setToggleContent("Series"));
   };
 
   const showNotFound =
@@ -41,7 +56,7 @@ const ContentTabs = (props) => {
         <h2>Browse top rated</h2>
         <button
           className={`${classes.tabButton} ${
-            showMovies && searchContent === ""
+            toggleContent === "Movies" && searchContent === ""
               ? classes.active
               : classes.toggleHover
           }`}
@@ -51,7 +66,7 @@ const ContentTabs = (props) => {
         </button>
         <button
           className={`${classes.tabButton} ${
-            showSeries && searchContent === ""
+            toggleContent === "Series" && searchContent === ""
               ? classes.active
               : classes.toggleHover
           }`}
@@ -60,7 +75,8 @@ const ContentTabs = (props) => {
           TV Shows
         </button>
       </div>
-      {contentIsLoading && <Loading text={"Loading content"} />}
+      {/* {moviesResponse.isLoading ||
+        (seriesResponse.isLoading && <Loading text={"Loading content"} />)}
       {showNotFound && (
         <NoSearchResults
           title={"No results found"}
@@ -68,21 +84,11 @@ const ContentTabs = (props) => {
           icon={faFrown}
           iconSize={"9x"}
         />
-      )}
-      {showMovies && !showSeries && !contentIsLoading && (
-        <MovieList
-          contentList={movies}
-          noResultsFound={showNotFound}
-          isMovie={true}
-        />
-      )}
-      {!showMovies && showSeries && !contentIsLoading && (
-        <MovieList
-          contentList={series}
-          noResultsFound={showNotFound}
-          isMovie={false}
-        />
-      )}
+      )} */}
+      <MediaList
+        content={toggleContent === "Movies" ? moviesResponse : seriesResponse}
+        noResultsFound={showNotFound}
+      />
     </Fragment>
   );
 };

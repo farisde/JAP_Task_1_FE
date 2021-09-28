@@ -1,30 +1,39 @@
 import { movieActions } from "./movie-slice";
 
-export const fetchContentList = () => {
-  return async (dispatch) => {
-    const fetchMovies = async () => {
-      const response = await fetch("https://localhost:5001/Movie/AllMovies");
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
-      if (!response.ok) {
-        throw new Error("Something went wrong while fetching movie data!");
-      }
+export const fetchMediaList = async (query) => {
+  const response = await fetch(
+    REACT_APP_API_URL +
+      "api/Media?MediaType=" +
+      query.mediaType +
+      "&PageNumber=" +
+      query.pageNumber
+  );
 
-      const allContent = await response.json();
-      return allContent.data;
-    };
+  if (!response.ok) {
+    throw new Error("Something went wrong while fetching movie data!");
+  }
 
-    try {
-      const allContent = await fetchMovies();
-      dispatch(
-        movieActions.replaceContentList({
-          content: allContent || [],
-          newRatingsRecieved: false,
-        })
-      );
-    } catch (error) {
-      console.log("sad zasad samo ovako", error);
-    }
-  };
+  return await response.json();
+  // return async (dispatch) => {
+  //   const fetchMovies = async () => {
+  //     const response = await fetch(REACT_APP_API_URL + "api/media?MediaType=" + query.mediaType);
+
+  //     if (!response.ok) {
+  //       throw new Error("Something went wrong while fetching movie data!");
+  //     }
+
+  //     return await response.json();
+  //   };
+
+  //   try {
+  //     const allContent = await fetchMovies();
+
+  //   } catch (error) {
+  //     console.log("sad zasad samo ovako", error);
+  //   }
+  // };
 };
 
 export const updateContentRating = (movieId, ratingValue) => {

@@ -3,32 +3,41 @@ import { createSlice } from "@reduxjs/toolkit";
 const movieSlice = createSlice({
   name: "movie",
   initialState: {
-    allContent: [],
+    contentList: [],
     movies: [],
     series: [],
     showMovies: true,
     showSeries: false,
     searchContent: "",
     contentIsLoading: true,
-    visibleMovies: 10,
     showLoadContentButton: true,
+    visibleMovies: 10,
+    pageNumber: 1,
+    toggleContent: "Movies",
   },
   reducers: {
-    replaceContentList(state, action) {
-      if (!action.payload.newRatingsRecieved) {
-        state.visibleMovies = 10;
-      }
-      state.allContent = action.payload.content;
-      state.movies = action.payload.content
-        .filter((m) => m.isMovie)
-        .slice(0, state.visibleMovies);
-      state.series = action.payload.content
-        .filter((m) => !m.isMovie)
-        .slice(0, state.visibleMovies);
-      state.contentIsLoading = false;
-      if (!action.payload.newRatingsRecieved) {
-        state.showLoadContentButton = true;
-      }
+    setPageNumber(state, action) {
+      state.pageNumber = action.payload;
+    },
+    setToggleContent(state, action) {
+      state.toggleContent = action.payload;
+    },
+    setContentList(state, action) {
+      state.contentList = action.payload;
+      // if (!action.payload.newRatingsRecieved) {
+      //   state.visibleMovies = 10;
+      // }
+      // state.contentList = action.payload.content;
+      // state.movies = action.payload.content
+      //   .filter((m) => m.isMovie)
+      //   .slice(0, state.visibleMovies);
+      // state.series = action.payload.content
+      //   .filter((m) => !m.isMovie)
+      //   .slice(0, state.visibleMovies);
+      // state.contentIsLoading = false;
+      // if (!action.payload.newRatingsRecieved) {
+      //   state.showLoadContentButton = true;
+      // }
     },
     showMovies(state) {
       if (!state.showMovies) {
@@ -68,9 +77,9 @@ const movieSlice = createSlice({
       }
     },
     replaceContentAfterSearch(state, action) {
-      state.allContent = action.payload.content;
+      state.contentList = action.payload.content;
       state.visibleMovies = 10;
-      if (state.allContent.length <= state.visibleMovies) {
+      if (state.contentList.length <= state.visibleMovies) {
         state.showLoadContentButton = false;
       } else {
         state.showLoadContentButton = true;
@@ -88,7 +97,7 @@ const movieSlice = createSlice({
     increaseVisibleMovies(state, action) {
       state.visibleMovies += 10;
       if (state.showMovies) {
-        const filteredContent = state.allContent.filter(
+        const filteredContent = state.contentList.filter(
           (m) =>
             (m.isMovie && state.searchContent === "") ||
             state.searchContent !== ""
@@ -98,7 +107,7 @@ const movieSlice = createSlice({
         }
         state.movies = filteredContent.slice(0, state.visibleMovies);
       } else if (state.showSeries) {
-        const filteredContent = state.allContent.filter(
+        const filteredContent = state.contentList.filter(
           (m) =>
             (!m.isMovie && state.searchContent === "") ||
             state.searchContent !== ""

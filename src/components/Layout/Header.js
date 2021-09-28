@@ -29,7 +29,7 @@ const Header = () => {
         {!isLoggedIn && (
           <div className={classes.authAction}>
             <h2 className={classes.signInButton} onClick={handleSignInClick}>
-              Sing In
+              Sign In
             </h2>
             <h2 className={classes.signUpButton} onClick={handleSignUpClick}>
               Sign Up

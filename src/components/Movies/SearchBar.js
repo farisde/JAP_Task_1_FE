@@ -2,7 +2,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchContentList, sendSearchQuery } from "../../store/movie-actions";
+import { fetchMediaList, sendSearchQuery } from "../../store/movie-actions";
 import { movieActions } from "../../store/movie-slice";
 import classes from "./SearchBar.module.css";
 
@@ -18,9 +18,9 @@ const SearchBar = (props) => {
         });
       }
       if (searchContent.length === 0) {
-        dispatch(fetchContentList()).then(() => {
-          dispatch(movieActions.resetSearchResults());
-        });
+        // dispatch(fetchMediaList()).then(() => {
+        //   dispatch(movieActions.resetSearchResults());
+        // });
       }
     }, 650);
     return () => {

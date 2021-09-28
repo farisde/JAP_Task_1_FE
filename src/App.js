@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { useSelector } from "react-redux";
 import LoginForm from "./components/Authentication/LoginForm";
 import RegisterForm from "./components/Authentication/RegisterForm";
@@ -10,15 +11,16 @@ function App() {
   const showLoginForm = useSelector((state) => state.auth.showLoginForm);
   const showRegisterForm = useSelector((state) => state.auth.showRegisterForm);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const queryClient = new QueryClient();
 
   return (
-    <Fragment>
+    <QueryClientProvider client={queryClient}>
       <Header />
       {!showLoginForm && !showRegisterForm && <SearchBar />}
       {!showLoginForm && !showRegisterForm && <ContentTabs />}
       {!isLoggedIn && !showLoginForm && showRegisterForm && <RegisterForm />}
       {!isLoggedIn && showLoginForm && !showRegisterForm && <LoginForm />}
-    </Fragment>
+    </QueryClientProvider>
   );
 }
 
