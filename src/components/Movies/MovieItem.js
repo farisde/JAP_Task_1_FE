@@ -1,19 +1,18 @@
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
 import classes from "./MovieItem.module.css";
 import Swal from "sweetalert2";
 import { Rating } from "@material-ui/lab";
-import { updateContentRating } from "../../store/movie-actions";
+import { fetchMediaList, updateContentRating } from "../../store/movie-actions";
 import "./SwalStyle.css";
 
 const MovieItem = (props) => {
-  const dispatch = useDispatch();
-
   const onStarClickHandler = (event) => {
-    let value = event.target.value;
+    const value = event.target.value;
     if (value < 0 || value > 5 || value == null || value === undefined) return;
 
-    dispatch(updateContentRating(props.movie.id, value)).then(() => {
+    var ratedMediaId = props.movie.id;
+
+    updateContentRating(ratedMediaId, value).then(() => {
       const swalText = `<div style='color:whitesmoke'>You have successfully rated "<b>${props.movie.title}</b>" with <b>${value} star(s)</b>!</div>`;
       Swal.fire({
         title: `<div style='color:whitesmoke'>Thank you for your rating!</div>`,
