@@ -47,11 +47,11 @@ export const updateContentRating = async (ratedMediaId, value) => {
   return await response.json();
 };
 
-export const sendSearchQuery = async ({ pageParam = 1 }, searchPhrase) => {
+export const sendSearchQuery = async ({ queryKey, pageParam = 1 }) => {
   const response = await fetch(
     REACT_APP_API_URL +
       "api/media?SearchPhrase=" +
-      searchPhrase +
+      queryKey[1] +
       "&PageNumber=" +
       pageParam
   );

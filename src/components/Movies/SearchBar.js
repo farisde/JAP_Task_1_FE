@@ -1,6 +1,7 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
+import { useInfiniteQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMediaList, sendSearchQuery } from "../../store/movie-actions";
 import { movieActions } from "../../store/movie-slice";
@@ -13,16 +14,17 @@ const SearchBar = (props) => {
   useEffect(() => {
     let timer = setTimeout(() => {
       if (searchContent.length > 1) {
-        dispatch(sendSearchQuery(searchContent)).then(() => {
-          movieActions.setContentLoading(false);
-        });
+        dispatch(movieActions.setContentLoading(true));
       }
       if (searchContent.length === 0) {
-        // dispatch(fetchMediaList()).then(() => {
-        //   dispatch(movieActions.resetSearchResults());
-        // });
+        dispatch(movieActions.setToggleContent("Movies"));
+        dispatch(movieActions.setContentLoading(false));
       }
-    }, 650);
+      if (searchContent.length > 1) {
+        dispatch(movieActions.setToggleContent("Search"));
+        dispatch(movieActions.setContentLoading(false));
+      }
+    }, 700);
     return () => {
       clearTimeout(timer);
     };

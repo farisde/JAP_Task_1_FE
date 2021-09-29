@@ -1,35 +1,22 @@
-import { faFrown, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faFrown } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch, useSelector } from "react-redux";
-import { movieActions } from "../../store/movie-slice";
+import { useSelector } from "react-redux";
 import Card from "../Shared/Card";
 import MovieItem from "./MovieItem";
 import classes from "./MediaList.module.css";
 import Loading from "../Shared/Loading";
 import NoSearchResults from "./NoSearchResults";
-import { useEffect } from "react";
 import sortMediaGroups from "../../helpers/sortMediaGroups";
 
 const MediaList = (props) => {
-  // const dispatch = useDispatch();
-  // const visibleMovies = useSelector((state) => state.movie.visibleMovies);
-  // //const allContent = useSelector((state) => state.movie.allContent);
-  // const showLoadContentButton = useSelector(
-  //   (state) => state.movie.showLoadContentButton
-  // );
-  const dispatch = useDispatch();
+  const contentIsLoading = useSelector((state) => state.movie.contentIsLoading);
 
-  // const loadMoreContentHandler = () => {
-  //   dispatch(props.setPageNumber(props.pageNumber + 1));
-  //   props.content.fetchNextPage({ pageParam: props.pageNumber });
-  // };
-
-  // const noResultsFound =
-  //   !props.content.isLoading &&
-  //   props.content.length === 0 &&
-  //   searchContent.length > 1;
-
-  if (props.content.isLoading || props.content.isFetchingNextPage) {
+  if (
+    props.content.isLoading ||
+    props.content.isFetchingNextPage ||
+    contentIsLoading
+  ) {
     return (
       <div className={classes.container}>
         <Loading text={"Loading content"} />
@@ -37,13 +24,18 @@ const MediaList = (props) => {
     );
   }
 
-  if (!props.content.isLoading && props.content.isError) {
-    <NoSearchResults
-      title={"No results found"}
-      description={"We couldn't find any results matching your input"}
-      icon={faFrown}
-      iconSize={"9x"}
-    />;
+  if (
+    !props.content.isLoading &&
+    props.content.data.pages[0].next === undefined
+  ) {
+    return (
+      <NoSearchResults
+        title={"No results found"}
+        description={"We couldn't find any results matching your input"}
+        icon={faFrown}
+        iconSize={"9x"}
+      />
+    );
   }
 
   return (

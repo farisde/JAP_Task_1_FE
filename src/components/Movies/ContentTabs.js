@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import MediaList from "./MediaList";
 import classes from "./ContentTabs.module.css";
 import { movieActions } from "../../store/movie-slice";
-import { fetchMovieList, fetchSeriesList } from "../../store/movie-actions";
+import {
+  fetchMovieList,
+  fetchSeriesList,
+  sendSearchQuery,
+} from "../../store/movie-actions";
 import { useInfiniteQuery } from "react-query";
 import MediaTab from "./MediaTab";
 
@@ -24,6 +28,16 @@ const ContentTabs = () => {
     getNextPageParam: (lastPage) => lastPage.next,
   });
 
+  const searchResponse = useInfiniteQuery(
+    ["search", searchContent],
+    sendSearchQuery,
+    {
+      keepPreviousData: true,
+      refetchInterval: 1000,
+      getNextPageParam: (lastPage) => lastPage.next,
+    }
+  );
+
   const handleMoviesTabClick = () => {
     dispatch(movieActions.setToggleContent("Movies"));
   };
@@ -31,6 +45,13 @@ const ContentTabs = () => {
   const handlSeriesTabClick = () => {
     dispatch(movieActions.setToggleContent("Series"));
   };
+
+  const content =
+    toggleContent === "Movies"
+      ? moviesResponse
+      : toggleContent === "Series"
+      ? seriesResponse
+      : searchResponse;
 
   return (
     <Fragment>
@@ -49,14 +70,7 @@ const ContentTabs = () => {
           searchContent={searchContent}
         />
       </div>
-      <MediaList
-        content={toggleContent === "Movies" ? moviesResponse : seriesResponse}
-        setPageNumber={
-          toggleContent === "Movies"
-            ? movieActions.setMoviePageNumber
-            : movieActions.setSeriesPageNumber
-        }
-      />
+      <MediaList content={content} />
     </Fragment>
   );
 };

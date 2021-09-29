@@ -5,6 +5,7 @@ const movieSlice = createSlice({
   initialState: {
     searchContent: "",
     toggleContent: "Movies",
+    contentIsLoading: false,
   },
   reducers: {
     setToggleContent(state, action) {
