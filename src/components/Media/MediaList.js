@@ -26,7 +26,7 @@ const MediaList = (props) => {
 
   if (
     !props.content.isLoading &&
-    props.content.data.pages[0].next === undefined
+    props.content.data.pages[0].results.length === 0
   ) {
     return (
       <NoSearchResults

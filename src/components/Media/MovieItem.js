@@ -2,8 +2,10 @@ import { Fragment } from "react";
 import classes from "./MovieItem.module.css";
 import Swal from "sweetalert2";
 import { Rating } from "@material-ui/lab";
-import { fetchMediaList, updateContentRating } from "../../store/movie-actions";
+import { updateContentRating } from "../../store/movie-actions";
 import "./SwalStyle.css";
+import formatReleaseDate from "../../helpers/formatReleaseDate";
+import formatCastMembers from "../../helpers/formatCastMembers";
 
 const MovieItem = (props) => {
   const onStarClickHandler = (event) => {
@@ -56,18 +58,11 @@ const MovieItem = (props) => {
           <h3>{props.movie.title}</h3>
           <p>{props.movie.description}</p>
           <p>
-            <b>Release date:</b>{" "}
-            {new Date(props.movie.releaseDate)
-              .toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })
-              .replace(/ /g, " ")}
+            <b>Release date:</b> {formatReleaseDate(props.movie.releaseDate)}
           </p>
           <p>
             <b>Cast: </b>
-            {props.movie.cast.map((c) => c.name).join(", ")}
+            {formatCastMembers(props.movie.cast)}
           </p>
         </span>
       </div>

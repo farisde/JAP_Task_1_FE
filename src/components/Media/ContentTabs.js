@@ -1,28 +1,38 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MediaList from "./MediaList";
 import classes from "./ContentTabs.module.css";
 import { movieActions } from "../../store/movie-slice";
-import {
-  fetchMovieList,
-  fetchSeriesList,
-  sendSearchQuery,
-} from "../../store/movie-actions";
+import { fetchMediaList, fetchSearchResults } from "../../store/movie-actions";
 import { useInfiniteQuery } from "react-query";
 import MediaTab from "./MediaTab";
+import { useHistory, useParams } from "react-router";
+import links from "../../links/links";
 
 const ContentTabs = () => {
   const searchContent = useSelector((state) => state.movie.searchContent);
   const toggleContent = useSelector((state) => state.movie.toggleContent);
   const dispatch = useDispatch();
+  const params = useParams();
+  const history = useHistory();
 
-  const moviesResponse = useInfiniteQuery("movies", fetchMovieList, {
+  useEffect(() => {
+    if (params.media === "movies") {
+      dispatch(movieActions.setToggleContent("movies"));
+      history.push(links.movies.url);
+    } else if (params.media === "series") {
+      dispatch(movieActions.setToggleContent("series"));
+      history.push(links.series.url);
+    }
+  }, [params.media, dispatch, history]);
+
+  const moviesResponse = useInfiniteQuery(["movies", 1], fetchMediaList, {
     keepPreviousData: true,
     refetchInterval: 1000,
     getNextPageParam: (lastPage) => lastPage.next,
   });
 
-  const seriesResponse = useInfiniteQuery("series", fetchSeriesList, {
+  const seriesResponse = useInfiniteQuery(["series", 2], fetchMediaList, {
     keepPreviousData: true,
     refetchInterval: 1000,
     getNextPageParam: (lastPage) => lastPage.next,
@@ -30,7 +40,7 @@ const ContentTabs = () => {
 
   const searchResponse = useInfiniteQuery(
     ["search", searchContent],
-    sendSearchQuery,
+    fetchSearchResults,
     {
       keepPreviousData: true,
       refetchInterval: 1000,
@@ -39,17 +49,19 @@ const ContentTabs = () => {
   );
 
   const handleMoviesTabClick = () => {
-    dispatch(movieActions.setToggleContent("Movies"));
+    dispatch(movieActions.setToggleContent("movies"));
+    history.push("/movies");
   };
 
   const handlSeriesTabClick = () => {
-    dispatch(movieActions.setToggleContent("Series"));
+    dispatch(movieActions.setToggleContent("series"));
+    history.push("/series");
   };
 
   const content =
-    toggleContent === "Movies"
+    toggleContent === "movies"
       ? moviesResponse
-      : toggleContent === "Series"
+      : toggleContent === "series"
       ? seriesResponse
       : searchResponse;
 
@@ -59,13 +71,13 @@ const ContentTabs = () => {
         <h2>Browse top rated</h2>
         <MediaTab
           name={"Movies"}
-          isCorrectContentType={toggleContent === "Movies"}
+          isCorrectContentType={toggleContent === "movies"}
           handleMediaTabClick={handleMoviesTabClick}
           searchContent={searchContent}
         />
         <MediaTab
           name={"TV Shows"}
-          isCorrectContentType={toggleContent === "Series"}
+          isCorrectContentType={toggleContent === "series"}
           handleMediaTabClick={handlSeriesTabClick}
           searchContent={searchContent}
         />

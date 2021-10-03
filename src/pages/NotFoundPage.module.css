@@ -1,0 +1,14 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  font-size: 3rem;
+  margin-top: 10rem;
+  flex-direction: column;
+}
+
+.errorCode {
+  font-weight: bold;
+  font-size: 4rem;
+}

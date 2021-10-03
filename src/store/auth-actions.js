@@ -1,8 +1,18 @@
 import Swal from "sweetalert2";
 import { authActions } from "./auth-slice";
 
+const swalConfig = {
+  title: "<div style='color:whitesmoke'>Sign Up error</div>",
+  icon: "error",
+  backdrop: true,
+  showConfirmButton: true,
+  confirmButtonColor: "#eb0028",
+  focusConfirm: false,
+  background: "#2C2C2C",
+};
+
 export const sendRegisterUserRequest = (name, email, password) => {
-  return async (dispatch) => {
+  return async () => {
     const registerUserRequest = async () => {
       const response = await fetch(
         process.env.REACT_APP_API_URL + "api/auth/register",
@@ -20,19 +30,12 @@ export const sendRegisterUserRequest = (name, email, password) => {
       );
 
       const content = await response.json();
-      const swalConfig = {
-        title: "<div style='color:whitesmoke'>Sign Up error</div>",
-        html: `<div style='color:whitesmoke'>${content.message}</div>`,
-        icon: "error",
-        backdrop: true,
-        showConfirmButton: true,
-        confirmButtonColor: "#eb0028",
-        focusConfirm: false,
-        background: "#2C2C2C",
-      };
 
       if (!response.ok) {
-        Swal.fire(swalConfig);
+        Swal.fire({
+          ...swalConfig,
+          html: `<div style='color:whitesmoke'>${content.message}</div>`,
+        });
         return;
       }
 
@@ -48,8 +51,7 @@ export const sendRegisterUserRequest = (name, email, password) => {
     };
 
     try {
-      const userId = await registerUserRequest();
-      console.log(userId);
+      await registerUserRequest();
     } catch (error) {}
   };
 };
@@ -72,14 +74,8 @@ export const sendLoginUserRequest = (email, password) => {
 
       if (!response.ok) {
         Swal.fire({
-          title: "<div style='color:whitesmoke'>Sign In error</div>",
+          ...swalConfig,
           html: `<div style='color:whitesmoke'>${content.message}</div>`,
-          icon: "error",
-          backdrop: true,
-          showConfirmButton: true,
-          confirmButtonColor: "#eb0028",
-          focusConfirm: false,
-          background: "#2C2C2C",
         });
         return null;
       }
