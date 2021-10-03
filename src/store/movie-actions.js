@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
-
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+import apiWrapper from "../services/apiWrapper";
 
 const swalConfig = {
   title: "<div style='color:whitesmoke'>Sign Up error</div>",
@@ -13,15 +12,9 @@ const swalConfig = {
 };
 
 export const fetchMediaList = async ({ queryKey, pageParam = 1 }) => {
-  const response = await fetch(
-    REACT_APP_API_URL +
-      "api/media?MediaType=" +
-      queryKey[1] +
-      "&PageNumber=" +
-      pageParam
+  const content = await apiWrapper(
+    "api/media?MediaType=" + queryKey[1] + "&PageNumber=" + pageParam
   );
-
-  const content = await response.json();
 
   if (!content.success) {
     Swal.fire({
@@ -37,17 +30,12 @@ export const fetchMediaList = async ({ queryKey, pageParam = 1 }) => {
 };
 
 export const updateContentRating = async (ratedMediaId, value) => {
-  const response = await fetch(REACT_APP_API_URL + "api/ratings", {
-    method: "POST",
-    body: JSON.stringify({ value, ratedMediaId }),
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const content = await apiWrapper("api/ratings", "POST", {
+    value,
+    ratedMediaId,
   });
 
-  const content = await response.json();
-
-  if (!response.ok) {
+  if (!content.success) {
     Swal.fire({
       ...swalConfig,
       html: `<div style='color:whitesmoke'>Something went wrong while submitting media rating!</div>`,
@@ -59,20 +47,14 @@ export const updateContentRating = async (ratedMediaId, value) => {
 };
 
 export const fetchSearchResults = async ({ queryKey, pageParam = 1 }) => {
-  const response = await fetch(
-    REACT_APP_API_URL +
-      "api/media?SearchPhrase=" +
-      queryKey[1] +
-      "&PageNumber=" +
-      pageParam
+  const content = await apiWrapper(
+    "api/media?SearchPhrase=" + queryKey[1] + "&PageNumber=" + pageParam
   );
-
-  const content = await response.json();
 
   if (!content.success) {
     Swal.fire({
       ...swalConfig,
-      html: `<div style='color:whitesmoke'>${response.statusText}</div>`,
+      html: `<div style='color:whitesmoke'>${content.message}</div>`,
     });
     return;
   }

@@ -1,8 +1,6 @@
-import { useHistory } from "react-router";
 import Swal from "sweetalert2";
-import links from "../links/links";
+import apiWrapper from "../services/apiWrapper";
 import { authActions } from "./auth-slice";
-import { movieActions } from "./movie-slice";
 
 const swalConfig = {
   title: "<div style='color:whitesmoke'>Sign Up error</div>",
@@ -15,24 +13,13 @@ const swalConfig = {
 };
 
 export const sendRegisterUserRequest = (name, email, password) => {
-  return async () => {
+  return () => {
     const registerUserRequest = async () => {
-      const response = await fetch(
-        process.env.REACT_APP_API_URL + "api/auth/register",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const content = await response.json();
+      const content = await apiWrapper("api/auth/register", "POST", {
+        name,
+        email,
+        password,
+      });
 
       if (!content.success) {
         Swal.fire({
@@ -54,26 +41,20 @@ export const sendRegisterUserRequest = (name, email, password) => {
     };
 
     try {
-      await registerUserRequest();
-    } catch (error) {}
+      registerUserRequest();
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
 export const sendLoginUserRequest = (email, password) => {
   return async (dispatch) => {
     const loginUserRequest = async () => {
-      const response = await fetch(
-        process.env.REACT_APP_API_URL + "api/auth/login",
-        {
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const content = await response.json();
+      const content = await apiWrapper("api/auth/login", "POST", {
+        email,
+        password,
+      });
 
       if (!content.success) {
         Swal.fire({
@@ -92,6 +73,8 @@ export const sendLoginUserRequest = (email, password) => {
         dispatch(authActions.setToken(token));
         dispatch(authActions.setIsLoggedIn(true));
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
