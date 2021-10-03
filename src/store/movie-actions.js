@@ -21,14 +21,14 @@ export const fetchMediaList = async ({ queryKey, pageParam = 1 }) => {
       pageParam
   );
 
-  if (!response.ok) {
+  const content = await response.json();
+
+  if (!content.success) {
     Swal.fire({
       ...swalConfig,
       html: `<div style='color:whitesmoke'>Something went wrong while fetching movie data!</div>`,
     });
   }
-
-  const content = await response.json();
 
   return {
     results: content.data,
@@ -45,14 +45,17 @@ export const updateContentRating = async (ratedMediaId, value) => {
     },
   });
 
+  const content = await response.json();
+
   if (!response.ok) {
     Swal.fire({
       ...swalConfig,
       html: `<div style='color:whitesmoke'>Something went wrong while submitting media rating!</div>`,
     });
+    return;
   }
 
-  return await response.json();
+  return content;
 };
 
 export const fetchSearchResults = async ({ queryKey, pageParam = 1 }) => {
@@ -64,14 +67,15 @@ export const fetchSearchResults = async ({ queryKey, pageParam = 1 }) => {
       pageParam
   );
 
-  if (!response.ok) {
+  const content = await response.json();
+
+  if (!content.success) {
     Swal.fire({
       ...swalConfig,
       html: `<div style='color:whitesmoke'>${response.statusText}</div>`,
     });
+    return;
   }
-
-  const content = await response.json();
 
   return {
     results: content.data,

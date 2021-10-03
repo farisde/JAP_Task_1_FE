@@ -1,5 +1,8 @@
+import { useHistory } from "react-router";
 import Swal from "sweetalert2";
+import links from "../links/links";
 import { authActions } from "./auth-slice";
+import { movieActions } from "./movie-slice";
 
 const swalConfig = {
   title: "<div style='color:whitesmoke'>Sign Up error</div>",
@@ -31,7 +34,7 @@ export const sendRegisterUserRequest = (name, email, password) => {
 
       const content = await response.json();
 
-      if (!response.ok) {
+      if (!content.success) {
         Swal.fire({
           ...swalConfig,
           html: `<div style='color:whitesmoke'>${content.message}</div>`,
@@ -72,7 +75,7 @@ export const sendLoginUserRequest = (email, password) => {
 
       const content = await response.json();
 
-      if (!response.ok) {
+      if (!content.success) {
         Swal.fire({
           ...swalConfig,
           html: `<div style='color:whitesmoke'>${content.message}</div>`,
@@ -88,7 +91,6 @@ export const sendLoginUserRequest = (email, password) => {
       if (token !== null) {
         dispatch(authActions.setToken(token));
         dispatch(authActions.setIsLoggedIn(true));
-        dispatch(authActions.setShowLoginForm(false));
       }
     } catch (error) {}
   };
