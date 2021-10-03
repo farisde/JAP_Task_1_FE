@@ -1,5 +1,5 @@
 import { createTheme, TextField } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { sendSignUpUserRequest } from "../store/auth-actions";
 import classes from "./SignUpPage.module.css";
@@ -8,46 +8,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const SignUpPage = () => {
-  // const [enteredName, setEnteredName] = useState("");
-  // const [enteredEmail, setEnteredEmail] = useState("");
-  // const [enteredPassword, setEnteredPassword] = useState("");
-  // const [formIsValid, setFormIsValid] = useState(false);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (enteredName !== "" && enteredPassword !== "" && enteredEmail !== "") {
-  //     setFormIsValid(true);
-  //   } else {
-  //     setFormIsValid(false);
-  //   }
-  // }, [enteredName, enteredPassword, enteredEmail]);
-
-  // const submitRegisterHandler = (event) => {
-  //   event.preventDefault();
-
-  //   if (formIsValid) {
-  //     dispatch(
-  //       sendSignUpUserRequest(enteredName, enteredEmail, enteredPassword)
-  //     );
-  //   }
-  // };
-
-  // const handleNameChange = (event) => {
-  //   setEnteredName(event.target.value);
-  // };
-
-  // const handleEmailChange = (event) => {
-  //   setEnteredEmail(event.target.value);
-  // };
-
-  // const handlePasswordChange = (event) => {
-  //   setEnteredPassword(event.target.value);
-  // };
-
-  // const darkTheme = createTheme({ palette: { type: "dark" } });
-
-  // const disabledButton = formIsValid ? "" : classes.disabledButton;
-
   const dispatch = useDispatch();
 
   const SignUpSchema = Yup.object().shape({
