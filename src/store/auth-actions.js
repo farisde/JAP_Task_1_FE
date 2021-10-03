@@ -12,7 +12,7 @@ const swalConfig = {
   background: "#2C2C2C",
 };
 
-export const sendRegisterUserRequest = (name, email, password) => {
+export const sendSignUpUserRequest = (name, email, password) => {
   return () => {
     const registerUserRequest = async () => {
       const content = await apiWrapper("api/auth/register", "POST", {
@@ -48,7 +48,7 @@ export const sendRegisterUserRequest = (name, email, password) => {
   };
 };
 
-export const sendLoginUserRequest = (email, password) => {
+export const sendSignInUserRequest = (email, password) => {
   return async (dispatch) => {
     const loginUserRequest = async () => {
       const content = await apiWrapper("api/auth/login", "POST", {

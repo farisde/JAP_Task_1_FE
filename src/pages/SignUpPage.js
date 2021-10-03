@@ -1,84 +1,128 @@
 import { createTheme, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { sendRegisterUserRequest } from "../store/auth-actions";
+import { sendSignUpUserRequest } from "../store/auth-actions";
 import classes from "./SignUpPage.module.css";
 import { ThemeProvider } from "@material-ui/core";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const SignUpPage = () => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [formIsValid, setFormIsValid] = useState(false);
+  // const [enteredName, setEnteredName] = useState("");
+  // const [enteredEmail, setEnteredEmail] = useState("");
+  // const [enteredPassword, setEnteredPassword] = useState("");
+  // const [formIsValid, setFormIsValid] = useState(false);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (enteredName !== "" && enteredPassword !== "" && enteredEmail !== "") {
+  //     setFormIsValid(true);
+  //   } else {
+  //     setFormIsValid(false);
+  //   }
+  // }, [enteredName, enteredPassword, enteredEmail]);
+
+  // const submitRegisterHandler = (event) => {
+  //   event.preventDefault();
+
+  //   if (formIsValid) {
+  //     dispatch(
+  //       sendSignUpUserRequest(enteredName, enteredEmail, enteredPassword)
+  //     );
+  //   }
+  // };
+
+  // const handleNameChange = (event) => {
+  //   setEnteredName(event.target.value);
+  // };
+
+  // const handleEmailChange = (event) => {
+  //   setEnteredEmail(event.target.value);
+  // };
+
+  // const handlePasswordChange = (event) => {
+  //   setEnteredPassword(event.target.value);
+  // };
+
+  // const darkTheme = createTheme({ palette: { type: "dark" } });
+
+  // const disabledButton = formIsValid ? "" : classes.disabledButton;
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (enteredName !== "" && enteredPassword !== "" && enteredEmail !== "") {
-      setFormIsValid(true);
-    } else {
-      setFormIsValid(false);
-    }
-  }, [enteredName, enteredPassword, enteredEmail]);
+  const SignUpSchema = Yup.object().shape({
+    name: Yup.string().required("Full name is required"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Email address is required"),
+    password: Yup.string()
+      .min(8, "Too Short!")
+      .required("Password is required"),
+  });
 
-  const submitRegisterHandler = (event) => {
-    event.preventDefault();
+  const signUp = (values) => {
+    if (
+      values.email === undefined ||
+      values.password === undefined ||
+      values.name === undefined
+    )
+      return;
 
-    if (formIsValid) {
-      dispatch(
-        sendRegisterUserRequest(enteredName, enteredEmail, enteredPassword)
-      );
-    }
+    dispatch(sendSignUpUserRequest(values.name, values.email, values.password));
   };
 
-  const handleNameChange = (event) => {
-    setEnteredName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEnteredEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setEnteredPassword(event.target.value);
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: SignUpSchema,
+    onSubmit: signUp,
+  });
 
   const darkTheme = createTheme({ palette: { type: "dark" } });
-
-  const disabledButton = formIsValid ? "" : classes.disabledButton;
+  const disabledButton =
+    formik.errors.email || formik.errors.password || formik.errors.name
+      ? classes.disabledButton
+      : "";
 
   return (
     <div className={classes.container}>
-      <form className={classes.form} onSubmit={submitRegisterHandler}>
+      <form className={classes.form} onSubmit={formik.handleSubmit}>
         <h2 className={classes.title}>Sign Up</h2>
         <ThemeProvider theme={darkTheme}>
           <div className={classes.input}>
             <TextField
               id="outlined-required"
+              name="name"
               label="Name"
               variant="outlined"
-              value={enteredName}
-              onChange={handleNameChange}
+              value={formik.values.name}
+              onChange={formik.handleChange}
               className={classes.inputFieldName}
             />
             <TextField
               id="outlined-required"
+              name="email"
               label="Email Address"
               variant="outlined"
               type="email"
-              value={enteredEmail}
-              onChange={handleEmailChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
               className={`${classes.inputText} ${classes.inputFieldEmail}`}
             />
           </div>
           <div className={classes.inputFieldPassword}>
             <TextField
               id="outlined-required"
+              name="password"
               label="Password"
               variant="outlined"
               type="password"
               autoComplete="current-password"
-              onChange={handlePasswordChange}
-              value={enteredPassword}
+              onChange={formik.handleChange}
+              value={formik.values.password}
             />
           </div>
         </ThemeProvider>
